@@ -163,6 +163,7 @@
     <button data-open="strategie">→ Strategie</button><br>
     <button data-open="vita">→ Vita</button><br>
     <button data-open="publikationen">→ Publikationen</button><br>
+    <button data-open="vortraege">→ Vorträge</button><br>
     <button data-open="kontakt">→ Kontakt</button>
   </nav>
   <svg class="lines" id="lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false"></svg>
@@ -293,32 +294,61 @@ document.addEventListener('keydown',e=>{
 const VITA=[
   {y:'laufend', s:2026.9, k:'Promotion', t:'Promotion Policing von Armut', p:'Universität Duisburg-Essen'},
   {y:'seit 2020', s:2020.9, k:'Beruf', t:'Vorstandsvorsitzende & Mitgründerin', p:'SGDV e.V.'},
-  {y:'2023–24', s:2023, k:'Beruf', t:'Wissenschaftliche Mitarbeiterin', p:'Universität Duisburg-Essen'},
-  {y:'2022–23', s:2022, k:'Beruf', t:'Migrationsberatung', p:'Ziuma e.V.'},
-  {y:'2021–22', s:2021, k:'Beruf', t:'Zentrum für Erinnerungskultur', p:'Stadt Duisburg'},
-  {y:'2018–20', s:2018, k:'Beruf', t:'Wiss. Mitarbeiterin, DFG-Projekt Aneignungskonflikte', p:'Uni DUE'},
-  {y:'2017–18', s:2017, k:'Beruf', t:'Beraterin für Betroffene rechter Gewalt', p:'BackUp Dortmund'},
-  {y:'2014–17', s:2014, k:'Ausbildung', t:'M.A. Internationale Migration & Interkulturelle Beziehungen', p:'Universität Osnabrück'},
-  {y:'2016', s:2016, k:'Ausbildung', t:'Erasmus', p:'Bilgi Universität Istanbul'},
-  {y:'2010–14', s:2010, k:'Ausbildung', t:'B.A. Kultur- & Geschichtswissenschaften', p:'Ruhr-Universität Bochum'},
+  {y:'2023–24', s:2023, k:'Beruf', t:'Wiss. Mitarbeiterin — „DjeKa: Diskriminierung jenseits der Kategorien"', p:'Institut Arbeit und Qualifikation, Uni Duisburg-Essen, gefördert durch die Antidiskriminierungsstelle des Bundes'},
+  {y:'2022–23', s:2022, k:'Beruf', t:'Migrationsberatung für Erwachsene', p:'Ziuma e.V.'},
+  {y:'2021–22', s:2021, k:'Beruf', t:'Wiss. Mitarbeiterin, Zentrum für Erinnerungskultur', p:'Stadt Duisburg'},
+  {y:'2018–20', s:2018, k:'Beruf', t:'Wiss. Mitarbeiterin, DFG-Projekt „Aneignungskonflikte in mischungsorientierten Stadtentwicklungsprozessen"', p:'Institut für Soziale Arbeit und Sozialpolitik, Uni Duisburg-Essen'},
+  {y:'2017–18', s:2017, k:'Beruf', t:'Beraterin für Opfer rechtsextremer und rassistischer Gewalt', p:'BackUp Dortmund'},
+  {y:'2016–17', s:2016.5, k:'Beruf', t:'Projektleiterin „Empowerment für Flüchtlingsfrauen"', p:'AWO Kreisverband Wesel e.V., Moers'},
+  {y:'2015–17', s:2015.5, k:'Engagement', t:'Mitgründung und Aufbau des lokalen kritnet-Knotens', p:'Netzwerk für kritische Migrations- und Grenzregimeforschung, Osnabrück'},
+  {y:'2015–16', s:2015, k:'Beruf', t:'Wissenschaftliche Hilfskraft', p:'Institut für Internationale Migration und Interkulturelle Studien, Osnabrück'},
+  {y:'2014–17', s:2014, k:'Ausbildung', t:'M.A. Internationale Migration & Interkulturelle Beziehungen — Arbeit: „Die ideale Türkin"', p:'Universität Osnabrück'},
+  {y:'2016', s:2016.2, k:'Ausbildung', t:'Erasmussemester, International Relations (Master)', p:'Bilgi Universität Istanbul'},
+  {y:'2010–14', s:2010, k:'Ausbildung', t:'2-Fach-B.A. Kultur, Individuum & Gesellschaft / Geschichtswissenschaften — Arbeit: „Struktureller Rassismus auf Malta?!"', p:'Ruhr-Universität Bochum'},
+  {y:'2009–16', s:2009, k:'Ausbildung', t:'Praktika', p:'u. a. Amadeu Antonio Stiftung Berlin, transcript-Verlag Bielefeld, 3sat/Kulturzeit Mainz, Pro Asyl Flüchtlingsrat Essen'},
 ];
 const PUBS=[
   {y:'2026', s:2026, t:'Antiziganistische Räumungspolitik. Zehn Jahre dasselbe Skript in Duisburg', v:'Berliner Gazette', g:'Stadtforschung'},
-  {y:'2025', s:2025, t:'Verdrängungspolitik durch die „Task Force Problemimmobilien"', v:'sub\\urban 13', m:'mit Ellen Drutschmann', g:'Stadtforschung'},
-  {y:'2024', s:2024.3, t:'Wohnungsräumung statt Problemlösung', v:'DeZIMinutes 15', m:'mit Thorsten Schlee', g:'Stadtforschung'},
-  {y:'2024', s:2024.2, t:'Multiple Prekarisierung', v:'IAQ-Report', m:'mit Schlee, Manolova', g:'Stadtforschung'},
-  {y:'2024', s:2024.1, t:'Wenn die Taskforce zweimal klingelt', v:'analyse & kritik', m:'mit Anna Irma Hilfrich', g:'Stadtforschung'},
-  {y:'2022', s:2022.2, t:"How tenants' reactions to rent increases affect displacement", v:'Urban Studies 59(15)', m:'mit Rinn, Wehrheim', g:'Stadtforschung'},
-  {y:'2022', s:2022.1, t:'Frauen in türkischen ultranationalistischen Szenen', v:'bpb', g:'Graue Wölfe'},
-  {y:'2020', s:2020.3, t:'Politiken sozialer Mischung und die Produktivität von Rassismus', v:'Geographica Helvetica 75(1)', m:'mit Moritz Rinn', g:'Stadtforschung'},
-  {y:'2020', s:2020.2, t:'Kein Einzelfall. Über den Tod von Adel B.', v:'sub\\urban 8(1/2)', m:'mit Rinn, Wehrheim', g:'Polizeigewalt'},
-  {y:'2020', s:2020.1, t:'„Ich bin stolz, Türkin zu sein!"', v:'Beltz Juventa', m:'mit Kemal Bozay', g:'Graue Wölfe'},
-  {y:'lfd.', s:2027, t:'DjeKa — Diskriminierung jenseits der Kategorien', v:'ADS · IAQ', g:'Vereinsforschung'},
+  {y:'2025', s:2025, t:'Verdrängungspolitik durch die „Task Force Problemimmobilien". Urbane Sicherheitsproduktion in Duisburg-Hochfeld', v:'sub\\urban 13 (2/3)', m:'mit Ellen Drutschmann', g:'Stadtforschung'},
+  {y:'2024', s:2024.4, t:'Wohnungsräumung statt Problemlösung. Wie Kommunen mit Zuwanderung aus Südosteuropa umgehen', v:'DeZIMinutes 15, DeZIM', m:'mit Thorsten Schlee', g:'Stadtforschung'},
+  {y:'2024', s:2024.3, t:'Multiple Prekarisierung. Zur Lebenslage osteuropäischer Migrant*innen in Duisburg-Hochfeld und -Marxloh', v:'IAQ-Report 2024-10', m:'mit Thorsten Schlee, Polina Manolova', g:'Stadtforschung'},
+  {y:'2024', s:2024.2, t:'Wenn die Taskforce zweimal klingelt', v:'analyse & kritik', m:'mit Anna Irma Hilfrich', g:'Stadtforschung'},
+  {y:'2024', s:2024.1, t:'„Taskforce Schrottimmobilie" und die Mär von der Aufwertung', v:'in: Hilfrich (Hg.), Europa-Lokal – Prekarisierung in Duisburg, KUKSTDU e.V., S. 21–28', g:'Stadtforschung'},
+  {y:'2022', s:2022.2, t:"How tenants' reactions to rent increases affect displacement: An interactionist approach to gentrification", v:'Urban Studies 59(15)', m:'mit Rinn, Wehrheim', g:'Stadtforschung'},
+  {y:'2022', s:2022.1, t:'Frauen in türkischen ultranationalistischen Szenen', v:'in: Jamal/Aydın (Hg.), „Graue Wölfe". Türkischer Ultranationalismus in Deutschland, bpb', g:'Graue Wölfe'},
+  {y:'2021', s:2021, t:'Konflikte um Wohnen in Gentrifizierungsgebieten. Ein interaktionistischer Zugang', v:'Verhandlungen des 40. Kongresses der Deutschen Gesellschaft für Soziologie', m:'mit Rinn, Wehrheim', g:'Stadtforschung'},
+  {y:'2020', s:2020.3, t:'Politiken sozialer Mischung und die Produktivität von Rassismus im „gefährlichen Viertel"', v:'Geographica Helvetica 75(1), 23–36', m:'mit Moritz Rinn', g:'Stadtforschung'},
+  {y:'2020', s:2020.2, t:'Kein Einzelfall. Über den Tod von Adel B., der während eines Polizeieinsatzes in Essen-Altendorf erschossen wurde', v:'sub\\urban 8(1/2)', m:'mit Rinn, Wehrheim', g:'Polizeigewalt'},
+  {y:'2020', s:2020.1, t:'„Ich bin stolz, Türkin zu sein!" Ultranationalistische Einstellungen von jungen Frauen bei den Grauen Wölfen', v:'in: Borstel/Bozay (Hg.), Kultur der Anerkennung statt Menschenfeindlichkeit, Beltz Juventa', m:'mit Kemal Bozay', g:'Graue Wölfe'},
+  {y:'2018', s:2018.2, t:'Frauen in ultranationalistischen türkischen Szenen — Interview über Ideologie und Rollenbilder der Grauen Wölfe', v:'ufuq.de', g:'Graue Wölfe'},
+  {y:'2018', s:2018.1, t:'„Ich bin stolz, Türkin zu sein!" Ultranationalistische Einstellungen von Mädchen und jungen Frauen bei den Grauen Wölfen', v:'Betrifft Mädchen 4 (2018), S. 164–169', m:'mit Kemal Bozay', g:'Graue Wölfe'},
+];
+const VORTRAEGE=[
+  {y:'2026', s:2026.5, t:'Problemimmobilien als Verdrängungstechnik — ordnungsrechtliche Verwaltungsakte als Mittel städtischer Verdrängung & Aufwertung', v:'AK Kritische Geographie, Universität Münster, 16.06.2026', g:'Stadtforschung'},
+  {y:'2026', s:2026.3, t:'Antiziganismus und Wohnen', v:'Pressekonferenz der Melde- und Informationsstelle Antiziganismus, Berlin, 16.04.2026', g:'Stadtforschung'},
+  {y:'2026', s:2026.1, t:'Prekäre Verhältnisse und Zugang zu sozialer Sicherung vor Ort', v:'Fachtagung „Zwischen Fachkräftemangel und Prekarisierung", DIFIS, Uni Duisburg-Essen, 29.01.2026', g:'Stadtforschung'},
+  {y:'2025', s:2025, t:'Mädchen und Frauen im ultranationalistischen Kontext', v:'Kurd-Akad & Informationsstelle Antikurdischer Rassismus, Uni Duisburg-Essen, 29.11.2025', g:'Graue Wölfe'},
+  {y:'2024', s:2024.6, t:'Umkämpfte Stadtentwicklung — Duisburg Hochfeld', v:'Essen, 12.12.2024', g:'Stadtforschung'},
+  {y:'2024', s:2024.5, t:'Umkämpfte Stadtentwicklung — Wie wollen wir Morgen leben? Duisburg Hochfeld', v:'Gastvortrag, Fachhochschule Dortmund, 04.12.2024', g:'Stadtforschung'},
+  {y:'2024', s:2024.4, t:'Graue Wölfe — Türkischer Ultranationalismus in Deutschland', v:'EL-DE-Haus Köln, 28.05.2024', g:'Graue Wölfe'},
+  {y:'2024', s:2024.1, t:'Praktische Solidarität in einem umkämpften Feld – Duisburg Hochfeld', v:'DeZIM-Tagung, Panel „Migration – Konflikt – Solidarität", 10.10.2024', g:'Stadtforschung'},
+  {y:'2023', s:2023.9, t:'Nation und Geschlecht — Geschlechterstereotypen in (ultra-)nationalistischen Denkmustern', v:'Interkultur e.V. Köln, 06.12.2023', g:'Graue Wölfe'},
+  {y:'2023', s:2023.7, t:'Frauenrollen in der türkischen extremen Rechten', v:'Nordpol, 28.09.2023', g:'Graue Wölfe'},
+  {y:'2022', s:2022.9, t:'„Ich bin stolz, Türkin zu sein!" – Ultranationalistische Einstellungen junger Frauen bei den Grauen Wölfen', v:'Trotz Allem Witten, 23.11.2022', g:'Graue Wölfe'},
+  {y:'2022', s:2022.7, t:'Frauen in ultranationalistischen türkischen Szenen — Fachtag „Wölfe im Schafspelz"', v:'Rojava Solidarität Bochum, 24.09.2022', g:'Graue Wölfe'},
+  {y:'2022', s:2022.6, t:'Frauen in ultranationalistischen türkischen Szenen — „Türkischer Rechtsextremismus in Deutschland"', v:'Landeszentrale für politische Bildung NRW, 21.09.2022', g:'Graue Wölfe'},
+  {y:'2022', s:2022.3, t:'Die ideale Türkin — Ultranationalistische Frauen in Deutschland', v:'Facharbeitskreis „Ultranationalismen", Türkische Gemeinde Schleswig-Holstein e.V., 12.04.2022', g:'Graue Wölfe'},
+  {y:'2022', s:2022.1, t:'Die ideale Türkin — Ultranationalistische Frauen in Deutschland', v:'Fachtag „Diversität – Rassismus als Herausforderung", Kurd-Akad, 29.01.2022', g:'Graue Wölfe'},
+  {y:'2020', s:2020.7, t:'(Nicht-)Konflikte um wohnraumbezogene Verdrängung in Gentrifizierungsgebieten', v:'40. Kongress der Deutschen Gesellschaft für Soziologie, 22.09.2020', m:'mit Moritz Rinn, Jan Wehrheim', g:'Stadtforschung'},
+  {y:'2019', s:2019.9, t:'Alltägliche Produktivitäten von Rassismen in aufwertungs- und mischungsorientierten Stadtentwicklungsprozessen', v:'Deutscher Kongress für Geographie, Uni Kiel, 27.09.2019', m:'mit Moritz Rinn', g:'Stadtforschung'},
+  {y:'2019', s:2019.7, t:'Ideologie und Rollenbilder von Frauen* in ultranationalistischen türkischen Szenen', v:'IDA-NRW Köln, 12.09.2019', g:'Graue Wölfe'},
+  {y:'2018', s:2018.9, t:'Die ideale Türkin — Frauen bei den Grauen Wölfen', v:'Universität Osnabrück, 10.12.2018', g:'Graue Wölfe'},
+  {y:'2018', s:2018.5, t:'Die ideale Türkin — Frauen bei den Grauen Wölfen', v:'AZ Aachen, 21.06.2018', g:'Graue Wölfe'},
 ];
 
 // ===== Register rendering =====
 const regBody=document.getElementById('regBody'), regControls=document.getElementById('regControls');
-const VIEWS=[['thematisch','Thematisch'],['chronologie','Chronologie'],['strategie','Strategie'],['vita','Vita'],['publikationen','Publikationen'],['kontakt','Kontakt'],['impressum','Impressum'],['datenschutz','Datenschutz']];
+const VIEWS=[['thematisch','Thematisch'],['chronologie','Chronologie'],['strategie','Strategie'],['vita','Vita'],['publikationen','Publikationen'],['vortraege','Vorträge'],['kontakt','Kontakt'],['impressum','Impressum'],['datenschutz','Datenschutz']];
 function ent(id,ti,sub,mt){return `<div class="entry"><span class="id mono">${id}</span><span class="ti">${ti}${sub?`<small>${sub}</small>`:''}</span><span class="mt">${mt||''}</span></div>`;}
 function renderControls(active){
   regControls.innerHTML=VIEWS.map(([k,l])=>`<button class="rc ${k===active?'on':''}" data-view="${k}" role="tab" aria-selected="${k===active}">${l}</button>`).join('');
@@ -331,19 +361,23 @@ function renderRegister(view){
     const groups=[['Analyse',['E']],['Felder',['A','A2','B','P','D','C','C2','KSA']],['Leerstellen',['G1','G2','G3','O1']],['Strategie & Aktivismus',['S','ST1','ST2','ST3']]];
     groups.forEach(([title,ids])=>{h+=`<div class="rh">${title}</div>`;
       ids.forEach(id=>{const n=by[id];h+=ent(n.c,n.label,n.body.split('.')[0]+'.',({core:'analyse',praxis:'praxis',field:'feld',gap:'in arbeit',open:'offen',strat:'strategie'})[n.t]);});});
-    h+=`<div class="rh">Kontakt</div>`+ent('@','wiese@sgdv.org','Duisburg-Hochfeld · Instagram @wiese_lena_','—');
+    h+=`<div class="rh">Kontakt</div>`+ent('@','kontakt@lenawiese.de','Duisburg-Hochfeld · Instagram @wiese_lena_','—');
   } else if(view==='vita'){
-    [['Beruf & Forschung',v=>v.k!=='Ausbildung'],['Ausbildung',v=>v.k==='Ausbildung']].forEach(([title,f])=>{
+    [['Beruf & Engagement',v=>v.k!=='Ausbildung'],['Ausbildung',v=>v.k==='Ausbildung']].forEach(([title,f])=>{
       h+=`<div class="rh">${title}</div>`;
       VITA.filter(f).sort((a,b)=>b.s-a.s).forEach(v=>h+=ent(v.y,v.t,v.p,v.k.toLowerCase()));});
   } else if(view==='publikationen'){
     h+=`<div class="rh">Chronologisch · neueste zuerst</div>`;
     [...PUBS].sort((a,b)=>b.s-a.s).forEach(p=>h+=ent(p.y,p.t,(p.m?p.m+' · ':'')+p.v,p.g.toLowerCase()));
+  } else if(view==='vortraege'){
+    h+=`<div class="rh">Vorträge · neueste zuerst</div>`;
+    [...VORTRAEGE].sort((a,b)=>b.s-a.s).forEach(p=>h+=ent(p.y,p.t,(p.m?p.m+' · ':'')+p.v,p.g.toLowerCase()));
   } else if(view==='chronologie'){
-    h+=`<div class="rh">Vita und Publikationen · eine Zeitachse</div>`;
+    h+=`<div class="rh">Vita, Publikationen und Vorträge · eine Zeitachse</div>`;
     const merged=[
       ...PUBS.map(p=>({s:p.s,y:p.y,t:p.t,sub:(p.m?p.m+' · ':'')+p.v,tag:'publikation'})),
-      ...VITA.filter(v=>v.k!=='Ausbildung').map(v=>({s:v.s,y:v.y,t:v.t,sub:v.p,tag:v.k==='Promotion'?'promotion':'station'}))
+      ...VORTRAEGE.map(p=>({s:p.s,y:p.y,t:p.t,sub:(p.m?p.m+' · ':'')+p.v,tag:'vortrag'})),
+      ...VITA.filter(v=>v.k!=='Ausbildung').map(v=>({s:v.s,y:v.y,t:v.t,sub:v.p,tag:v.k==='Promotion'?'promotion':(v.k==='Engagement'?'engagement':'station')}))
     ].sort((a,b)=>b.s-a.s);
     merged.forEach(it=>h+=ent(it.y,it.t,it.sub,it.tag));
   } else if(view==='strategie'){
@@ -356,7 +390,7 @@ function renderRegister(view){
       <p><a class="mailto" href="mailto:kontakt@lenawiese.de">kontakt@lenawiese.de</a></p>
       <a class="btn-mail" href="mailto:kontakt@lenawiese.de">E-Mail schreiben →</a>
       <p style="margin-top:22px">Der Link öffnet dein E-Mail-Programm. Es werden dabei keine Daten an diese Website oder Dritte übermittelt — die Nachricht verlässt dein Gerät erst, wenn du sie selbst absendest.</p>
-      <p>Instagram: @wiese_lena_ · Duisburg-Hochfeld</p>
+      <p>Instagram: <a class="mailto" href="https://www.instagram.com/wiese_lena_" target="_blank" rel="noopener noreferrer">@wiese_lena_</a> · Facebook: <a class="mailto" href="https://www.facebook.com/profile.php?id=100011396652298" target="_blank" rel="noopener noreferrer">Lena Wiese</a> · Duisburg-Hochfeld</p>
     </div>`;
   } else if(view==='impressum'){
     h+=`<div class="rh">Impressum</div><div class="legal">
@@ -366,6 +400,8 @@ function renderRegister(view){
       <p>E-Mail: <a class="mailto" href="mailto:kontakt@lenawiese.de">kontakt@lenawiese.de</a></p>
       <h3>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h3>
       <p>Lena Wiese, Anschrift wie oben.</p>
+      <h3>Streitschlichtung</h3>
+      <p>Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: <a class="mailto" href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener noreferrer">ec.europa.eu/consumers/odr</a>. Meine E-Mail-Adresse findest du oben im Impressum. Ich bin nicht bereit und nicht verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
       <h3>Haftung für Inhalte</h3>
       <p>Als Diensteanbieterin bin ich gemäß § 7 Abs. 1 DDG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 DDG bin ich als Diensteanbieterin jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.</p>
       <h3>Haftung für Links</h3>
