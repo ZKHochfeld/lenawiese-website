@@ -221,7 +221,7 @@
 <script>
 const N=[
   {id:'E',t:'core',x:50,y:46,c:'K.00',label:'Klasse & Hegemonie',
-   body:'Der analytische Kern. Nach Marx das Klassenverhältnis aus Eigentum und Produktion, nach Gramsci die Hegemonie, also wie diese Ordnung zur Selbstverständlichkeit wird. Stadt, Rassismus, Geschlecht und Antiziganismus sind von hier aus Erscheinungsformen desselben Verhältnisses.'},
+   body:'Der analytische Kern. Nach Marx das Klassenverhältnis aus Eigentum und Produktion, nach Gramsci die Hegemonie, also wie diese Ordnung zur Selbstverständlichkeit wird. Stadt, Rassismus, Geschlecht, Nationalismus und Antiziganismus sind von hier aus Erscheinungsformen desselben Verhältnisses.'},
   {id:'S',t:'praxis',x:50,y:72,c:'P.00',label:'Praktische Solidarität',
    body:'Der Praxispol gegenüber der Analyse. Nicht akademischer Diskurs, sondern alltägliche, communityübergreifende Praxis, mit Handlungsmacht und Gegenmacht als Ziel.'},
   {id:'A',t:'field',x:20,y:24,c:'F.01',label:'Umkämpfte Stadt',
@@ -234,26 +234,24 @@ const N=[
    body:'Frauen bei den Grauen Wölfen, Nation, Antifeminismus und ultranationalistische Rollenbilder.',
    refs:[['2022','Frauen in ultranationalistischen Szenen','bpb'],['2020','Ich bin stolz, Türkin zu sein','Beltz Juventa']]},
   {id:'P',t:'field',x:87,y:54,c:'F.04',label:'(Rassistische) Polizeigewalt',
-   body:'Rassistische Polizei- und Staatsgewalt, vom Tod Adel B. bis zur Kampagne Amed Ahmad.',
+   body:'Rassistische Polizei- und Staatsgewalt, vom Tod Adel B. bis zum Aktivismus in der Initiative Amed Ahmad, seit 2018.',
    refs:[['2020','Kein Einzelfall. Über den Tod von Adel B.','sub\\urban']]},
   {id:'D',t:'field',x:15,y:52,c:'F.05',label:'Policing von Armut',
    body:'Meine Promotion. Armuts- und Kriminalitätsdiskurse, Migrationssteuerung und repressive Praktiken an der Reproduktion von Problemstadtteilen.',
    refs:[['lfd.','Policing von Armut','Uni Duisburg-Essen']]},
   {id:'C',t:'field',x:24,y:81,c:'F.06',label:'Antiziganismus & Menschenrechte',
-   body:'Rom:nja und Sinte:zza, Gedenkarbeit, Wohnen und Diskriminierung, darin das Forschungsprojekt DjeKa.',
+   body:'Rom:nja und Sinte:zza, Gedenkarbeit, Wohnen und Diskriminierung, bearbeitet über Recherche, Aktivismus und Öffentlichkeitsarbeit, darin das Forschungsprojekt DjeKa.',
    refs:[['lfd.','DjeKa — Diskriminierung jenseits der Kategorien','ADS · IAQ']]},
   {id:'C2',t:'field',x:75,y:81,c:'F.07',label:'Geschichte der Sinti in Duisburg',
-   body:'Verfolgung, Erinnerung und Gegenwart der Duisburger Sinti, von der Ausstellung bis zur Forderung nach einem Gedenkort.'},
+   body:'Verfolgung, Erinnerung und Gegenwart der Duisburger Sinti, bearbeitet über Recherche und Öffentlichkeitsarbeit, von der Ausstellung bis zur Forderung nach einem Gedenkort.'},
   {id:'KSA',t:'field',x:38,y:64,c:'F.08',label:'Kritische Soziale Arbeit',
-   body:'Disziplinärer Rahmen und Kritik an Sozialer Arbeit als steuernder Fürsorge. Vermittelt zwischen Analyse und Praxis.'},
+   body:'Disziplinärer Rahmen und Kritik an Sozialer Arbeit als steuernder Fürsorge, bearbeitet über Recherche und alltägliche Praxis. Vermittelt zwischen Analyse und Praxis.'},
   {id:'G1',t:'gap',x:9,y:75,c:'L.01',label:'Roma in Rumänien',
    body:'Leerstelle, in Arbeit. Die Herkunftsseite der Duisburger Gegenwart. Historische und aktuelle Verfolgung, die den Bogen zur Räumungspolitik hier schließt.'},
   {id:'G2',t:'gap',x:88,y:68,c:'L.02',label:'Zwangsarbeit in Duisburg',
    body:'Leerstelle, in Arbeit. Zwangsarbeit und ihre räumlichen Spuren, als Frage nach Kontinuitäten von Ausbeutung und Rassismus.'},
   {id:'G3',t:'gap',x:33,y:33,c:'L.03',label:'Arbeiterwohnen Ruhrgebiet',
    body:'Leerstelle, in Arbeit. Die lange Linie vom Zechenwohnen zur Problemimmobilie, spätes 19. Jahrhundert bis heute.'},
-  {id:'O1',t:'open',x:92,y:35,c:'L.—',label:'offen',
-   body:'Eine bewusst leer gehaltene Leerstelle. Die Karte bleibt unfertig, weil die Arbeit mit Leerstellen selbst die Methode ist.'},
   {id:'ST1',t:'strat',x:28,y:91,c:'S.01',label:'Gegenmacht',
    body:'Strategie. Räume der Gegenmacht schaffen, kollektive Autonomie und Unabhängigkeit gewinnen, Bildung und Kultur als Gegenhegemonie gegen bestehende Verhältnisse.'},
   {id:'ST2',t:'strat',x:47,y:90,c:'S.02',label:'Umverteilung',
@@ -261,7 +259,7 @@ const N=[
   {id:'ST3',t:'strat',x:70,y:90,c:'S.03',label:'Organizing',
    body:'Strategie. Organisierung und Vernetzung im Quartier und darüber hinaus, Selbstorganisierung, Empowerment und dritte Orte als Basis, communityübergreifend.'},
 ];
-const E=[['S','E','axis'],['A','E'],['B','E'],['C','E'],['D','E'],['KSA','E'],['A2','A'],['C2','C'],['P','D'],['P','C'],['A','D'],['C','D'],['S','D'],['S','C'],['S','KSA'],['G1','C'],['G1','D'],['G2','C2'],['G2','E'],['G3','A'],['G3','E'],['O1','B'],['ST1','S'],['ST2','S'],['ST3','S'],['ST2','E'],['ST3','C']];
+const E=[['S','E','axis'],['A','E'],['B','E'],['C','E'],['D','E'],['KSA','E'],['A2','A'],['C2','C'],['P','D'],['P','C'],['A','D'],['C','D'],['S','D'],['S','C'],['S','KSA'],['G1','C'],['G1','D'],['G2','C2'],['G2','E'],['G3','A'],['G3','E'],['B','P'],['B','D'],['ST1','S'],['ST2','S'],['ST3','S'],['ST2','E'],['ST3','C']];
 const by=Object.fromEntries(N.map(n=>[n.id,n]));
 const feld=document.getElementById('feld'), lines=document.getElementById('lines');
 const TYPE_LABEL={core:'Analytischer Kern',praxis:'Praxispol',field:'Bearbeitetes Feld',gap:'Leerstelle, in Arbeit',open:'Bewusst offen gehalten',strat:'Strategie & Aktivismus'};
@@ -384,7 +382,7 @@ function renderRegister(view){
   renderControls(view);
   let h='';
   if(view==='thematisch'){
-    const groups=[['Analyse',['E']],['Felder',['A','A2','B','P','D','C','C2','KSA']],['Leerstellen',['G1','G2','G3','O1']],['Strategie & Aktivismus',['S','ST1','ST2','ST3']]];
+    const groups=[['Analyse',['E']],['Felder',['A','A2','B','P','D','C','C2','KSA']],['Leerstellen',['G1','G2','G3']],['Strategie & Aktivismus',['S','ST1','ST2','ST3']]];
     groups.forEach(([title,ids])=>{h+=`<div class="rh">${title}</div>`;
       ids.forEach(id=>{const n=by[id];h+=ent(n.c,n.label,n.body.split('.')[0]+'.',({core:'analyse',praxis:'praxis',field:'feld',gap:'in arbeit',open:'offen',strat:'strategie'})[n.t]);});});
     h+=`<div class="rh">Kontakt</div>`+ent('@','kontakt@lenawiese.de','Duisburg-Hochfeld · Instagram @wiese_lena_','—');
