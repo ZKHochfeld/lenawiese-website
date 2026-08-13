@@ -55,7 +55,7 @@
   .br{bottom:26px;right:28px;color:var(--dim);text-align:right}
   .br a{text-decoration:none}
 
-  .toggle{position:fixed;top:26px;right:28px;z-index:8;display:flex;border:1px solid #342c3d;border-radius:30px;overflow:hidden}
+  .toggle{position:fixed;top:26px;right:28px;z-index:25;display:flex;border:1px solid #342c3d;border-radius:30px;overflow:hidden}
   .toggle button{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:1px;background:transparent;
     color:var(--dim);border:none;padding:9px 16px;cursor:pointer;text-transform:uppercase}
   .toggle button.on{background:var(--paper);color:var(--ink)}
@@ -151,7 +151,21 @@
   .cform .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 
   @media(max-width:640px){
-    .ghost{font-size:26vw}.tl .rl{display:none}.entry{grid-template-columns:56px 1fr;gap:12px}.entry .mt{display:none}
+    .ghost{display:none}
+    .tl .rl{display:none}
+    .tl .nm{font-size:18px}
+    .corner.br{display:none}
+    .bl{display:none}
+    .node.core .dot{width:58px!important;height:58px!important}
+    .node.praxis .dot{width:54px!important;height:54px!important}
+    .node.field .dot{width:42px!important;height:42px!important}
+    .node.gap .dot{width:38px!important;height:38px!important}
+    .node.open .dot{width:30px!important;height:30px!important}
+    .node.strat .dot{width:36px!important;height:36px!important}
+    .node .lab{font-size:9.5px;max-width:84px}
+    .node.core .lab,.node.praxis .lab{font-size:11px}
+    .coord{font-size:8px}
+    .entry{grid-template-columns:56px 1fr;gap:12px}.entry .mt{display:none}
     .reg-title{font-size:30px;top:56px}
   }
 </style>
