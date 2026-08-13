@@ -115,6 +115,8 @@
   .entry:hover{background:#ece3d3}
   .entry .id{font-family:'Space Mono',monospace;font-size:12px;color:#6a6154}
   .entry .ti{font-family:Fraunces,serif;font-size:19px;font-weight:600;line-height:1.2}
+  .entry .ti a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--terra);text-underline-offset:3px}
+  .entry .ti a:hover{color:var(--terra)}
   .entry .ti small{display:block;font-family:Inter,sans-serif;font-size:12.5px;font-weight:400;color:#544c44;margin-top:3px}
   .entry .mt{font-family:'Space Mono',monospace;font-size:11px;color:#6a6154;text-align:right}
   .reg-title{font-family:Fraunces,serif;font-size:44px;font-weight:600;position:fixed;top:60px;left:40px}
@@ -237,8 +239,7 @@ const N=[
    body:'Rassistische Polizei- und Staatsgewalt, vom Tod Adel B. bis zum Aktivismus in der Initiative Amed Ahmad, seit 2018.',
    refs:[['2020','Kein Einzelfall. Über den Tod von Adel B.','sub\\urban']]},
   {id:'D',t:'field',x:15,y:52,c:'F.05',label:'Policing von Armut',
-   body:'Meine Promotion. Armuts- und Kriminalitätsdiskurse, Migrationssteuerung und repressive Praktiken an der Reproduktion von Problemstadtteilen.',
-   refs:[['lfd.','Policing von Armut','Uni Duisburg-Essen']]},
+   body:'Armuts- und Kriminalitätsdiskurse, Migrationssteuerung und repressive Praktiken an der Reproduktion von Problemstadtteilen — in Bearbeitung.'},
   {id:'C',t:'field',x:24,y:81,c:'F.06',label:'Antiziganismus & Menschenrechte',
    body:'Rom:nja und Sinte:zza, Gedenkarbeit, Wohnen und Diskriminierung, bearbeitet über Recherche, Aktivismus und Öffentlichkeitsarbeit, darin das Forschungsprojekt DjeKa.',
    refs:[['lfd.','DjeKa — Diskriminierung jenseits der Kategorien','ADS · IAQ']]},
@@ -316,7 +317,6 @@ document.addEventListener('keydown',e=>{
 
 // ===== Vita + Publikationen =====
 const VITA=[
-  {y:'laufend', s:2026.9, k:'Promotion', t:'Promotion Policing von Armut', p:'Universität Duisburg-Essen'},
   {y:'seit 2020', s:2020.9, k:'Beruf', t:'Vorstandsvorsitzende & Mitgründerin', p:'SGDV e.V.'},
   {y:'2023–24', s:2023, k:'Beruf', t:'Wiss. Mitarbeiterin — „DjeKa: Diskriminierung jenseits der Kategorien"', p:'Institut Arbeit und Qualifikation, Uni Duisburg-Essen, gefördert durch die Antidiskriminierungsstelle des Bundes'},
   {y:'2022–23', s:2022, k:'Beruf', t:'Migrationsberatung für Erwachsene', p:'Ziuma e.V.'},
@@ -332,20 +332,20 @@ const VITA=[
   {y:'2009–16', s:2009, k:'Ausbildung', t:'Praktika', p:'u. a. Amadeu Antonio Stiftung Berlin, transcript-Verlag Bielefeld, 3sat/Kulturzeit Mainz, Pro Asyl Flüchtlingsrat Essen'},
 ];
 const PUBS=[
-  {y:'2026', s:2026, t:'Antiziganistische Räumungspolitik. Zehn Jahre dasselbe Skript in Duisburg', v:'Berliner Gazette', g:'Stadtforschung'},
-  {y:'2025', s:2025, t:'Verdrängungspolitik durch die „Task Force Problemimmobilien". Urbane Sicherheitsproduktion in Duisburg-Hochfeld', v:'sub\\urban 13 (2/3)', m:'mit Ellen Drutschmann', g:'Stadtforschung'},
-  {y:'2024', s:2024.4, t:'Wohnungsräumung statt Problemlösung. Wie Kommunen mit Zuwanderung aus Südosteuropa umgehen', v:'DeZIMinutes 15, DeZIM', m:'mit Thorsten Schlee', g:'Stadtforschung'},
-  {y:'2024', s:2024.3, t:'Multiple Prekarisierung. Zur Lebenslage osteuropäischer Migrant*innen in Duisburg-Hochfeld und -Marxloh', v:'IAQ-Report 2024-10', m:'mit Thorsten Schlee, Polina Manolova', g:'Stadtforschung'},
-  {y:'2024', s:2024.2, t:'Wenn die Taskforce zweimal klingelt', v:'analyse & kritik', m:'mit Anna Irma Hilfrich', g:'Stadtforschung'},
-  {y:'2024', s:2024.1, t:'„Taskforce Schrottimmobilie" und die Mär von der Aufwertung', v:'in: Hilfrich (Hg.), Europa-Lokal – Prekarisierung in Duisburg, KUKSTDU e.V., S. 21–28', g:'Stadtforschung'},
-  {y:'2022', s:2022.2, t:"How tenants' reactions to rent increases affect displacement: An interactionist approach to gentrification", v:'Urban Studies 59(15)', m:'mit Rinn, Wehrheim', g:'Stadtforschung'},
+  {y:'2026', s:2026, t:'Antiziganistische Räumungspolitik. Zehn Jahre dasselbe Skript in Duisburg', v:'Berliner Gazette', g:'Stadtforschung', u:'https://berlinergazette.de/de/antiziganistische-raeumungspolitik-zehn-jahre-dasselbe-skript-in-duisburg/'},
+  {y:'2025', s:2025, t:'Verdrängungspolitik durch die „Task Force Problemimmobilien". Urbane Sicherheitsproduktion in Duisburg-Hochfeld', v:'sub\\urban 13 (2/3)', m:'mit Ellen Drutschmann', g:'Stadtforschung', u:'https://doi.org/10.36900/suburban.v13i2/3.1019'},
+  {y:'2024', s:2024.4, t:'Wohnungsräumung statt Problemlösung. Wie Kommunen mit Zuwanderung aus Südosteuropa umgehen', v:'DeZIMinutes 15, DeZIM', m:'mit Thorsten Schlee', g:'Stadtforschung', u:'https://www.dezim-institut.de/publikationen/publikation-detail/wohnungsraeumung-statt-problemloesung/'},
+  {y:'2024', s:2024.3, t:'Multiple Prekarisierung. Zur Lebenslage osteuropäischer Migrant*innen in Duisburg-Hochfeld und -Marxloh', v:'IAQ-Report 2024-10', m:'mit Thorsten Schlee, Polina Manolova', g:'Stadtforschung', u:'https://www.uni-due.de/iaq/iaq-report-info.php?nr=2024-10'},
+  {y:'2024', s:2024.2, t:'Wenn die Taskforce zweimal klingelt', v:'analyse & kritik', m:'mit Anna Irma Hilfrich', g:'Stadtforschung', u:'https://www.akweb.de/bewegung/repression-gegen-romnja-in-duisburg-hochfeld-laesst-die-stadt-sogenannte-problemimmobilien-raeumen/'},
+  {y:'2024', s:2024.1, t:'„Taskforce Schrottimmobilie" und die Mär von der Aufwertung', v:'in: Hilfrich (Hg.), Europa-Lokal – Prekarisierung in Duisburg, KUKSTDU e.V., S. 21–28', g:'Stadtforschung', u:'https://www.uni-due.de/imperia/md/content/iaq/europalokal_prekarisierung_in_duisburg_kuksdu_e.v.pdf'},
+  {y:'2022', s:2022.2, t:"How tenants' reactions to rent increases affect displacement: An interactionist approach to gentrification", v:'Urban Studies 59(15)', m:'mit Rinn, Wehrheim', g:'Stadtforschung', u:"https://www.researchgate.net/publication/359508364_How_tenants'_reactions_to_rent_increases_affect_displacement_An_interactionist_approach_to_gentrification"},
   {y:'2022', s:2022.1, t:'Frauen in türkischen ultranationalistischen Szenen', v:'in: Jamal/Aydın (Hg.), „Graue Wölfe". Türkischer Ultranationalismus in Deutschland, bpb', g:'Graue Wölfe'},
-  {y:'2021', s:2021, t:'Konflikte um Wohnen in Gentrifizierungsgebieten. Ein interaktionistischer Zugang', v:'Verhandlungen des 40. Kongresses der Deutschen Gesellschaft für Soziologie', m:'mit Rinn, Wehrheim', g:'Stadtforschung'},
-  {y:'2020', s:2020.3, t:'Politiken sozialer Mischung und die Produktivität von Rassismus im „gefährlichen Viertel"', v:'Geographica Helvetica 75(1), 23–36', m:'mit Moritz Rinn', g:'Stadtforschung'},
-  {y:'2020', s:2020.2, t:'Kein Einzelfall. Über den Tod von Adel B., der während eines Polizeieinsatzes in Essen-Altendorf erschossen wurde', v:'sub\\urban 8(1/2)', m:'mit Rinn, Wehrheim', g:'Polizeigewalt'},
+  {y:'2021', s:2021, t:'Konflikte um Wohnen in Gentrifizierungsgebieten. Ein interaktionistischer Zugang', v:'Verhandlungen des 40. Kongresses der Deutschen Gesellschaft für Soziologie', m:'mit Rinn, Wehrheim', g:'Stadtforschung', u:'https://publikationen.soziologie.de/index.php/kongressband_2020/article/view/1361/1625'},
+  {y:'2020', s:2020.3, t:'Politiken sozialer Mischung und die Produktivität von Rassismus im „gefährlichen Viertel"', v:'Geographica Helvetica 75(1), 23–36', m:'mit Moritz Rinn', g:'Stadtforschung', u:'https://doi.org/10.5194/gh-75-23-2020'},
+  {y:'2020', s:2020.2, t:'Kein Einzelfall. Über den Tod von Adel B., der während eines Polizeieinsatzes in Essen-Altendorf erschossen wurde', v:'sub\\urban 8(1/2)', m:'mit Rinn, Wehrheim', g:'Polizeigewalt', u:'https://zeitschrift-suburban.de/sys/index.php/suburban/article/view/556/754'},
   {y:'2020', s:2020.1, t:'„Ich bin stolz, Türkin zu sein!" Ultranationalistische Einstellungen von jungen Frauen bei den Grauen Wölfen', v:'in: Borstel/Bozay (Hg.), Kultur der Anerkennung statt Menschenfeindlichkeit, Beltz Juventa', m:'mit Kemal Bozay', g:'Graue Wölfe'},
-  {y:'2018', s:2018.2, t:'Frauen in ultranationalistischen türkischen Szenen — Interview über Ideologie und Rollenbilder der Grauen Wölfe', v:'ufuq.de', g:'Graue Wölfe'},
-  {y:'2018', s:2018.1, t:'„Ich bin stolz, Türkin zu sein!" Ultranationalistische Einstellungen von Mädchen und jungen Frauen bei den Grauen Wölfen', v:'Betrifft Mädchen 4 (2018), S. 164–169', m:'mit Kemal Bozay', g:'Graue Wölfe'},
+  {y:'2018', s:2018.2, t:'Frauen in ultranationalistischen türkischen Szenen — Interview über Ideologie und Rollenbilder der Grauen Wölfe', v:'ufuq.de', g:'Graue Wölfe', u:'http://www.ufuq.de/frauen-in-ultranationalistischen-tuerkischen-szenen-interview-mit-lena-wiese-ueber-ideologie-und-rollenbilder-der-grauen-woelfe/'},
+  {y:'2018', s:2018.1, t:'„Ich bin stolz, Türkin zu sein!" Ultranationalistische Einstellungen von Mädchen und jungen Frauen bei den Grauen Wölfen', v:'Betrifft Mädchen 4 (2018), S. 164–169', m:'mit Kemal Bozay', g:'Graue Wölfe', u:'https://www.beltz.de/fachmedien/sozialpaedagogik_soziale_arbeit/zeitschriften/betrifft_maedchen/article/Journal.html?tx_beltz_journal%5Barticle%5D=40039&cHash=1354c72ee936ed5ab9e1dbfa9d10c70b'},
 ];
 const VORTRAEGE=[
   {y:'2026', s:2026.5, t:'Problemimmobilien als Verdrängungstechnik — ordnungsrechtliche Verwaltungsakte als Mittel städtischer Verdrängung & Aufwertung', v:'AK Kritische Geographie, Universität Münster, 16.06.2026', g:'Stadtforschung'},
@@ -373,7 +373,10 @@ const VORTRAEGE=[
 // ===== Register rendering =====
 const regBody=document.getElementById('regBody'), regControls=document.getElementById('regControls');
 const VIEWS=[['thematisch','Thematisch'],['chronologie','Chronologie'],['strategie','Strategie'],['vita','Vita'],['publikationen','Publikationen'],['vortraege','Vorträge'],['kontakt','Kontakt'],['impressum','Impressum'],['datenschutz','Datenschutz']];
-function ent(id,ti,sub,mt){return `<div class="entry"><span class="id mono">${id}</span><span class="ti">${ti}${sub?`<small>${sub}</small>`:''}</span><span class="mt">${mt||''}</span></div>`;}
+function ent(id,ti,sub,mt,url){
+  const title=url?`<a href="${url}" target="_blank" rel="noopener noreferrer">${ti} ↗</a>`:ti;
+  return `<div class="entry"><span class="id mono">${id}</span><span class="ti">${title}${sub?`<small>${sub}</small>`:''}</span><span class="mt">${mt||''}</span></div>`;
+}
 function renderControls(active){
   regControls.innerHTML=VIEWS.map(([k,l])=>`<button class="rc ${k===active?'on':''}" data-view="${k}" role="tab" aria-selected="${k===active}">${l}</button>`).join('');
   regControls.querySelectorAll('button').forEach(b=>b.onclick=()=>renderRegister(b.dataset.view));
@@ -392,18 +395,18 @@ function renderRegister(view){
       VITA.filter(f).sort((a,b)=>b.s-a.s).forEach(v=>h+=ent(v.y,v.t,v.p,v.k.toLowerCase()));});
   } else if(view==='publikationen'){
     h+=`<div class="rh">Chronologisch · neueste zuerst</div>`;
-    [...PUBS].sort((a,b)=>b.s-a.s).forEach(p=>h+=ent(p.y,p.t,(p.m?p.m+' · ':'')+p.v,p.g.toLowerCase()));
+    [...PUBS].sort((a,b)=>b.s-a.s).forEach(p=>h+=ent(p.y,p.t,(p.m?p.m+' · ':'')+p.v,p.g.toLowerCase(),p.u));
   } else if(view==='vortraege'){
     h+=`<div class="rh">Vorträge · neueste zuerst</div>`;
     [...VORTRAEGE].sort((a,b)=>b.s-a.s).forEach(p=>h+=ent(p.y,p.t,(p.m?p.m+' · ':'')+p.v,p.g.toLowerCase()));
   } else if(view==='chronologie'){
     h+=`<div class="rh">Vita, Publikationen und Vorträge · eine Zeitachse</div>`;
     const merged=[
-      ...PUBS.map(p=>({s:p.s,y:p.y,t:p.t,sub:(p.m?p.m+' · ':'')+p.v,tag:'publikation'})),
+      ...PUBS.map(p=>({s:p.s,y:p.y,t:p.t,sub:(p.m?p.m+' · ':'')+p.v,tag:'publikation',u:p.u})),
       ...VORTRAEGE.map(p=>({s:p.s,y:p.y,t:p.t,sub:(p.m?p.m+' · ':'')+p.v,tag:'vortrag'})),
       ...VITA.filter(v=>v.k!=='Ausbildung').map(v=>({s:v.s,y:v.y,t:v.t,sub:v.p,tag:v.k==='Promotion'?'promotion':(v.k==='Engagement'?'engagement':'station')}))
     ].sort((a,b)=>b.s-a.s);
-    merged.forEach(it=>h+=ent(it.y,it.t,it.sub,it.tag));
+    merged.forEach(it=>h+=ent(it.y,it.t,it.sub,it.tag,it.u));
   } else if(view==='strategie'){
     h+=`<div class="rh">Strategie &amp; Aktivismus · die Handlungsebene</div>`;
     ['S','ST1','ST2','ST3'].forEach(id=>{const n=by[id];h+=ent(n.c,n.label,n.body.replace('Strategie. ',''),'praxis');});
