@@ -97,6 +97,8 @@
   #sheet .k{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--terra)}
   #sheet h2{font-family:Fraunces,serif;font-size:30px;font-weight:600;line-height:1.1;margin:10px 0 16px}
   #sheet p{font-size:15px;line-height:1.65;color:#3a3330}
+  #sheet p a{color:var(--terra);text-decoration:underline;text-underline-offset:2px}
+  #sheet p a:hover{color:var(--aubergine)}
   #sheet .refs{margin-top:22px;border-top:1px solid #ddd2c1;padding-top:16px}
   #sheet .refs .r{font-size:13px;padding:7px 0;border-bottom:1px solid #ece3d3}
   #sheet .refs .r b{font-weight:600}
@@ -236,7 +238,7 @@ const N=[
    body:'Frauen bei den Grauen Wölfen, Nation, Antifeminismus und ultranationalistische Rollenbilder.',
    refs:[['2022','Frauen in ultranationalistischen Szenen','bpb'],['2020','Ich bin stolz, Türkin zu sein','Beltz Juventa']]},
   {id:'P',t:'field',x:87,y:54,c:'F.04',label:'(Rassistische) Polizeigewalt',
-   body:'Rassistische Polizei- und Staatsgewalt, vom Tod Adel B. bis zum Aktivismus in der Initiative Amed Ahmad, seit 2018.',
+   body:'Rassistische Polizei- und Staatsgewalt, vom Tod Adel B. bis zum Aktivismus in der <a href="https://www.staatsgewalt.org" target="_blank" rel="noopener noreferrer">Initiative Amed Ahmad</a>, seit 2018.',
    refs:[['2020','Kein Einzelfall. Über den Tod von Adel B.','sub\\urban']]},
   {id:'D',t:'field',x:15,y:52,c:'F.05',label:'Policing von Armut',
    body:'Armuts- und Kriminalitätsdiskurse, Migrationssteuerung und repressive Praktiken an der Reproduktion von Problemstadtteilen — in Bearbeitung.'},
@@ -295,7 +297,7 @@ function openNode(id){const n=by[id];
   lastFocused=document.activeElement;
   document.getElementById('sk').textContent=n.c+' · '+TYPE_LABEL[n.t];
   document.getElementById('sh').textContent=n.label;
-  document.getElementById('sp').textContent=n.body;
+  document.getElementById('sp').innerHTML=n.body;
   const sr=document.getElementById('sr');
   if(n.refs&&n.refs.length){sr.style.display='block';sr.innerHTML='<div class="k" style="margin-bottom:8px">Ausgewählte Arbeiten</div>'+
     n.refs.map(r=>`<div class="r"><b>${r[0]}</b> · ${r[1]} <span class="v">${r[2]}</span></div>`).join('');}
