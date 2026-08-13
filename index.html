@@ -135,8 +135,20 @@
   .legal ul{padding-left:22px;margin-bottom:14px}
   .legal a.mailto{font-family:'Space Mono',monospace;color:var(--terra);word-break:break-all}
   .legal .btn-mail{display:inline-block;margin-top:8px;padding:12px 22px;background:var(--ink);color:var(--paper);
-    text-decoration:none;border-radius:26px;font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.5px}
+    text-decoration:none;border-radius:26px;font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.5px;
+    border:none;cursor:pointer;font-weight:400}
   .legal .btn-mail:hover{background:var(--terra)}
+  .cform{margin-top:20px;max-width:420px}
+  .cform label{display:block;font-family:'Space Mono',monospace;font-size:11px;text-transform:uppercase;
+    letter-spacing:.5px;color:#544c44;margin:14px 0 5px}
+  .cform input,.cform textarea{width:100%;font-family:Inter,sans-serif;font-size:15px;padding:10px 12px;
+    border:1px solid #d8cdbb;border-radius:6px;background:#fff;color:var(--ink)}
+  .cform input:focus,.cform textarea:focus{border-color:var(--terra)}
+  .cform textarea{min-height:110px;resize:vertical}
+  .cform .consent{display:flex;gap:10px;align-items:flex-start;margin-top:16px;font-size:13.5px;line-height:1.5;color:#3a3330}
+  .cform .consent input{width:auto;margin-top:3px}
+  .cform button[type=submit]{margin-top:18px}
+  .cform .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 
   @media(max-width:640px){
     .ghost{font-size:26vw}.tl .rl{display:none}.entry{grid-template-columns:56px 1fr;gap:12px}.entry .mt{display:none}
@@ -386,10 +398,30 @@ function renderRegister(view){
   } else if(view==='kontakt'){
     h+=`<div class="rh">Kontakt</div><div class="legal">
       <h3>Schreib mir</h3>
-      <p>Für Anfragen zu Forschung, Vorträgen, Presse oder Zusammenarbeit erreichst du mich per E-Mail.</p>
-      <p><a class="mailto" href="mailto:kontakt@lenawiese.de">kontakt@lenawiese.de</a></p>
-      <a class="btn-mail" href="mailto:kontakt@lenawiese.de">E-Mail schreiben →</a>
-      <p style="margin-top:22px">Der Link öffnet dein E-Mail-Programm. Es werden dabei keine Daten an diese Website oder Dritte übermittelt — die Nachricht verlässt dein Gerät erst, wenn du sie selbst absendest.</p>
+      <p>Für Anfragen zu Forschung, Vorträgen, Presse oder Zusammenarbeit erreichst du mich über das Formular oder direkt per E-Mail.</p>
+      <form class="cform" action="https://formsubmit.co/kontakt@lenawiese.de" method="POST">
+        <input type="hidden" name="_subject" value="Neue Nachricht von lenawiese.de">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="https://lenawiese.de/">
+        <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off">
+        <label for="cf-vor">Vorname *</label>
+        <input id="cf-vor" type="text" name="Vorname" autocomplete="given-name" required>
+        <label for="cf-nach">Nachname *</label>
+        <input id="cf-nach" type="text" name="Nachname" autocomplete="family-name" required>
+        <label for="cf-mail">E-Mail *</label>
+        <input id="cf-mail" type="email" name="email" autocomplete="email" required>
+        <label for="cf-tel">Telefon</label>
+        <input id="cf-tel" type="tel" name="Telefon" autocomplete="tel">
+        <label for="cf-msg">Nachricht *</label>
+        <textarea id="cf-msg" name="Nachricht" required></textarea>
+        <label class="consent">
+          <input type="checkbox" required>
+          <span>Ich bin mit der Verarbeitung meiner Angaben zur Bearbeitung dieser Anfrage einverstanden, siehe <button type="button" onclick="openReg('datenschutz')" style="background:none;border:none;padding:0;color:var(--terra);text-decoration:underline;cursor:pointer;font:inherit">Datenschutzerklärung</button>. *</span>
+        </label>
+        <button type="submit" class="btn-mail">Absenden →</button>
+      </form>
+      <p style="margin-top:22px">Alternativ direkt per E-Mail: <a class="mailto" href="mailto:kontakt@lenawiese.de">kontakt@lenawiese.de</a></p>
       <p>Instagram: <a class="mailto" href="https://www.instagram.com/wiese_lena_" target="_blank" rel="noopener noreferrer">@wiese_lena_</a> · Facebook: <a class="mailto" href="https://www.facebook.com/profile.php?id=100011396652298" target="_blank" rel="noopener noreferrer">Lena Wiese</a> · Duisburg-Hochfeld</p>
     </div>`;
   } else if(view==='impressum'){
@@ -419,8 +451,11 @@ function renderRegister(view){
       <p>Alle Schriftarten (Fraunces, Space Mono, Inter) sind lokal auf dieser Website eingebunden. Es findet keine Verbindung zu Google-Servern oder anderen externen Font-Anbietern statt, wenn du diese Seite aufrufst — es werden dadurch keine Daten wie deine IP-Adresse an Dritte übertragen.</p>
       <h3>4. Hosting</h3>
       <p>Diese Seite wird als statische Website ausgeliefert. Beim Aufruf verarbeitet der Hosting-Anbieter automatisch technische Zugriffsdaten (u. a. IP-Adresse, Datum und Uhrzeit des Zugriffs, aufgerufene Datei, verwendeter Browser), wie es bei jedem Websitebesuch technisch notwendig ist (Server-Logfiles). Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der technischen Bereitstellung und Sicherheit der Seite). Diese Daten werden nicht mit anderen Datenquellen zusammengeführt.</p>
-      <h3>5. Kontaktaufnahme per E-Mail</h3>
-      <p>Wenn du mich über den Kontakt-Link per E-Mail erreichst, werden die von dir mitgeteilten Daten (z. B. Absenderadresse, Inhalt der Nachricht) ausschließlich zur Bearbeitung deiner Anfrage verarbeitet und gespeichert (Art. 6 Abs. 1 lit. b bzw. f DSGVO). Diese Website selbst speichert oder verarbeitet dabei keine Daten — die Nachricht wird direkt über dein eigenes E-Mail-Programm versendet.</p>
+      <h3>5. Kontaktformular</h3>
+      <p>Für das Kontaktformular nutze ich den Dienst <strong>FormSubmit</strong> (formsubmit.co), der die Formulardaten technisch entgegennimmt und per E-Mail an mich weiterleitet. Beim Absenden werden die von dir eingegebenen Daten (Vorname, Nachname, E-Mail-Adresse, optional Telefonnummer, Nachricht) an die Server dieses Anbieters übermittelt und von dort an meine E-Mail-Adresse weitergeleitet. Die Verarbeitung erfolgt auf Grundlage deiner Einwilligung (Art. 6 Abs. 1 lit. a DSGVO), die du beim Absenden des Formulars über die Checkbox erteilst, sowie auf Grundlage meines berechtigten Interesses an der Bearbeitung von Anfragen (Art. 6 Abs. 1 lit. f DSGVO). Du kannst deine Einwilligung jederzeit mit Wirkung für die Zukunft widerrufen, indem du mich per E-Mail kontaktierst.</p>
+      <p>Zum Anbieter FormSubmit: Nach eigenen Angaben des Anbieters (siehe dessen <a class="mailto" href="https://formsubmit.co/privacy.pdf" target="_blank" rel="noopener noreferrer">Datenschutzhinweise</a>) werden keine darüberhinausgehenden Daten dauerhaft gespeichert; genauere Angaben zum Serverstandort oder eine Auftragsverarbeitungsvereinbarung nach Art. 28 DSGVO bietet der Anbieter derzeit nicht an. Es ist daher nicht auszuschließen, dass die Datenverarbeitung teilweise außerhalb der EU stattfindet. Die im Formular integrierte Spamerkennung von Google (reCAPTCHA) ist bewusst deaktiviert, sodass beim Ausfüllen des Formulars keine Verbindung zu Google-Servern aufgebaut wird. Wenn du diese Datenübermittlung vermeiden möchtest, nutze bitte alternativ die direkte E-Mail-Adresse unten.</p>
+      <h3>5a. Kontaktaufnahme per E-Mail</h3>
+      <p>Wenn du mich stattdessen direkt per E-Mail erreichst, werden die von dir mitgeteilten Daten (z. B. Absenderadresse, Inhalt der Nachricht) ausschließlich zur Bearbeitung deiner Anfrage verarbeitet und gespeichert (Art. 6 Abs. 1 lit. b bzw. f DSGVO). Diese Website selbst speichert oder verarbeitet dabei keine Daten — die Nachricht wird direkt über dein eigenes E-Mail-Programm versendet.</p>
       <h3>6. Deine Rechte</h3>
       <p>Du hast das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und Widerspruch gegen die Verarbeitung deiner personenbezogenen Daten sowie das Recht auf Beschwerde bei einer Datenschutz-Aufsichtsbehörde. Zuständig ist die Landesbeauftragte für Datenschutz und Informationsfreiheit Nordrhein-Westfalen.</p>
     </div>`;
