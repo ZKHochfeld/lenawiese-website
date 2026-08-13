@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lena Wiese — Feld</title>
+<meta name="description" content="Lena Wiese — interdisziplinäre Stadt-, Migrations- und Sozialforschung in Duisburg-Hochfeld. Forschung zu Verdrängung, Antiziganismus, Polizeigewalt und kritischer Sozialer Arbeit.">
+<meta name="color-scheme" content="dark light">
+<meta property="og:title" content="Lena Wiese — Feld">
+<meta property="og:description" content="Interdisziplinäre Stadt-, Migrations- und Sozialforschung. Duisburg-Hochfeld.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2242%22 fill=%22%23141019%22/><circle cx=%2250%22 cy=%2250%22 r=%2222%22 fill=%22%23b6552f%22/></svg>">
+<style>
+  @font-face{font-family:'Fraunces';src:url('fonts/fraunces-400.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+  @font-face{font-family:'Fraunces';src:url('fonts/fraunces-600.woff2') format('woff2');font-weight:600;font-style:normal;font-display:swap}
+  @font-face{font-family:'Fraunces';src:url('fonts/fraunces-500italic.woff2') format('woff2');font-weight:500;font-style:italic;font-display:swap}
+  @font-face{font-family:'Space Mono';src:url('fonts/space-mono-400.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+  @font-face{font-family:'Space Mono';src:url('fonts/space-mono-700.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap}
+  @font-face{font-family:'Inter';src:url('fonts/inter-400.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+  @font-face{font-family:'Inter';src:url('fonts/inter-500.woff2') format('woff2');font-weight:500;font-style:normal;font-display:swap}
+  @font-face{font-family:'Inter';src:url('fonts/inter-600.woff2') format('woff2');font-weight:600;font-style:normal;font-display:swap}
+
+  :root{
+    --ink:#141019; --paper:#f4efe6;
+    --teal:#3c6b6b; --terra:#b6552f; --aubergine:#8a5578; --ochre:#e2a63e; --dim:#a89e91;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{background:var(--ink);color:var(--paper);font-family:Inter,system-ui,sans-serif;overflow:hidden}
+  .mono{font-family:'Space Mono',monospace}
+  .serif{font-family:Fraunces,Georgia,serif}
+
+  .skip-link{position:absolute;left:8px;top:-60px;z-index:100;background:var(--paper);color:var(--ink);
+    padding:12px 18px;border-radius:6px;font-family:'Space Mono',monospace;font-size:13px;transition:top .2s}
+  .skip-link:focus{top:8px}
+
+  a{color:inherit}
+  :focus-visible{outline:3px solid var(--ochre);outline-offset:2px}
+  button:focus-visible{outline:3px solid var(--ochre);outline-offset:2px}
+
+  @media (prefers-reduced-motion:reduce){
+    *{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+  }
+
+  /* ===== FELD MODE ===== */
+  #feld{position:fixed;inset:0;transition:opacity .5s}
+  .ghost{position:absolute;left:50%;top:47%;transform:translate(-50%,-50%);
+    font-family:Fraunces,serif;font-weight:600;font-size:19vw;letter-spacing:-.02em;
+    color:#ffffff;opacity:.035;pointer-events:none;user-select:none;white-space:nowrap}
+  .corner{position:fixed;z-index:6;font-size:12px;letter-spacing:.5px}
+  .tl{top:26px;left:28px}
+  .tl .nm{font-family:Fraunces,serif;font-size:22px;font-weight:600;letter-spacing:.3px}
+  .tl .rl{color:var(--dim);margin-top:3px;max-width:230px;line-height:1.45}
+  .bl{bottom:26px;left:28px;color:var(--dim);max-width:250px;line-height:1.5}
+  .br{bottom:26px;right:28px;color:var(--dim);text-align:right}
+  .br a{text-decoration:none}
+
+  .toggle{position:fixed;top:26px;right:28px;z-index:8;display:flex;border:1px solid #342c3d;border-radius:30px;overflow:hidden}
+  .toggle button{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:1px;background:transparent;
+    color:var(--dim);border:none;padding:9px 16px;cursor:pointer;text-transform:uppercase}
+  .toggle button.on{background:var(--paper);color:var(--ink)}
+
+  svg.lines{position:absolute;inset:0;width:100%;height:100%}
+  svg.lines line{stroke:#5a4e63;stroke-width:1;vector-effect:non-scaling-stroke;transition:.3s}
+  svg.lines line.axis{stroke:var(--aubergine);stroke-width:2;opacity:.7}
+  svg.lines line.hot{stroke:var(--ochre);stroke-width:2}
+
+  .node{position:absolute;transform:translate(-50%,-50%);z-index:4;cursor:pointer;
+    display:flex;flex-direction:column;align-items:center;gap:7px;text-align:center;
+    background:none;border:none;color:inherit;font-family:inherit;transition:transform .25s}
+  .node:hover{transform:translate(-50%,-50%) scale(1.06)}
+  .dotwrap{position:relative;display:grid;place-items:center}
+  .dot{border-radius:50%;transition:.25s}
+  .node .lab{font-size:11.5px;line-height:1.2;max-width:120px;letter-spacing:.2px}
+  .node.field .dot{background:var(--teal);box-shadow:0 0 0 0 rgba(60,107,107,.5)}
+  .node.core .dot{background:var(--terra)}
+  .node.praxis .dot{background:var(--aubergine)}
+  .node.strat .dot{background:#9c6690;box-shadow:0 0 0 5px rgba(156,102,144,.14)}
+  .node.strat .lab{font-weight:600}
+  .node.gap .dot{background:transparent;border:2px dashed var(--ochre)}
+  .node.open .dot{background:transparent;border:1.5px dashed #837a6c}
+  .node.core .lab,.node.praxis .lab{font-family:Fraunces,serif;font-size:13px;font-weight:600}
+  .node.gap .lab{color:var(--ochre);font-family:'Space Mono',monospace;font-size:11px}
+  .node.open .lab{color:#a99f8e;font-style:italic}
+  .coord{font-family:'Space Mono',monospace;font-size:9px;color:var(--dim);opacity:.9;margin-top:-3px}
+  .gap .dot::after{content:'';position:absolute;inset:0;border-radius:50%;
+    box-shadow:0 0 0 0 rgba(226,166,62,.5);animation:pulse 3.2s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(226,166,62,.45)}70%{box-shadow:0 0 0 16px rgba(226,166,62,0)}100%{box-shadow:0 0 0 0 rgba(226,166,62,0)}}
+
+  /* sliding sheet */
+  #sheet{position:fixed;top:0;right:0;height:100%;width:min(440px,92vw);z-index:20;
+    background:var(--paper);color:var(--ink);transform:translateX(101%);transition:transform .45s cubic-bezier(.6,.05,.1,1);
+    padding:64px 40px 40px;overflow-y:auto;box-shadow:-30px 0 60px -30px rgba(0,0,0,.6)}
+  #sheet.on{transform:none}
+  #sheet .x{position:absolute;top:22px;right:26px;font-family:'Space Mono',monospace;font-size:13px;
+    background:none;border:none;cursor:pointer;color:var(--ink);letter-spacing:1px}
+  #sheet .k{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--terra)}
+  #sheet h2{font-family:Fraunces,serif;font-size:30px;font-weight:600;line-height:1.1;margin:10px 0 16px}
+  #sheet p{font-size:15px;line-height:1.65;color:#3a3330}
+  #sheet .refs{margin-top:22px;border-top:1px solid #ddd2c1;padding-top:16px}
+  #sheet .refs .r{font-size:13px;padding:7px 0;border-bottom:1px solid #ece3d3}
+  #sheet .refs .r b{font-weight:600}
+  #sheet .refs .r .v{color:var(--terra)}
+
+  /* ===== REGISTER MODE ===== */
+  #register{position:fixed;inset:0;background:var(--paper);color:var(--ink);z-index:10;
+    opacity:0;pointer-events:none;transition:opacity .5s;overflow-y:auto}
+  #register.on{opacity:1;pointer-events:auto}
+  .reg-inner{max-width:920px;margin:0 auto;padding:110px 40px 80px}
+  .reg-inner .rh{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;text-transform:uppercase;
+    color:var(--terra);margin:38px 0 10px;border-bottom:1px solid var(--ink);padding-bottom:8px}
+  .reg-inner .rh:first-child{margin-top:0}
+  .entry{display:grid;grid-template-columns:80px 1fr 120px;gap:18px;align-items:baseline;
+    padding:13px 0;border-bottom:1px solid #ddd2c1;cursor:default}
+  .entry:hover{background:#ece3d3}
+  .entry .id{font-family:'Space Mono',monospace;font-size:12px;color:#6a6154}
+  .entry .ti{font-family:Fraunces,serif;font-size:19px;font-weight:600;line-height:1.2}
+  .entry .ti small{display:block;font-family:Inter,sans-serif;font-size:12.5px;font-weight:400;color:#544c44;margin-top:3px}
+  .entry .mt{font-family:'Space Mono',monospace;font-size:11px;color:#6a6154;text-align:right}
+  .reg-title{font-family:Fraunces,serif;font-size:44px;font-weight:600;position:fixed;top:60px;left:40px}
+  .reg-controls{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:34px}
+  .reg-controls .rc{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:1px;text-transform:uppercase;
+    background:transparent;border:1px solid #d8cdbb;color:#544c44;padding:8px 15px;border-radius:22px;cursor:pointer;transition:.15s}
+  .reg-controls .rc:hover{border-color:var(--ink);color:var(--ink)}
+  .reg-controls .rc.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  #entry button{display:inline-block;font-family:'Space Mono',monospace;font-size:12px;color:var(--dim);
+    background:none;border:none;cursor:pointer;text-align:right;padding:3px 0;letter-spacing:.5px;text-decoration:underline}
+  #entry button:hover{color:var(--paper)}
+
+  /* Textseiten: Impressum, Datenschutz, Kontakt */
+  .legal{max-width:720px}
+  .legal h3{font-family:Fraunces,serif;font-size:22px;font-weight:600;margin:30px 0 10px}
+  .legal h3:first-child{margin-top:0}
+  .legal p,.legal li{font-size:15px;line-height:1.7;color:#3a3330;margin-bottom:10px}
+  .legal ul{padding-left:22px;margin-bottom:14px}
+  .legal a.mailto{font-family:'Space Mono',monospace;color:var(--terra);word-break:break-all}
+  .legal .btn-mail{display:inline-block;margin-top:8px;padding:12px 22px;background:var(--ink);color:var(--paper);
+    text-decoration:none;border-radius:26px;font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.5px}
+  .legal .btn-mail:hover{background:var(--terra)}
+
+  @media(max-width:640px){
+    .ghost{font-size:26vw}.tl .rl{display:none}.entry{grid-template-columns:56px 1fr;gap:12px}.entry .mt{display:none}
+    .reg-title{font-size:30px;top:56px}
+  }
+</style>
+</head>
+<body>
+
+<a href="#hauptinhalt" class="skip-link mono">Zum Hauptinhalt springen</a>
+
+<h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">Lena Wiese — Feld. Interdisziplinäre Stadt-, Migrations- und Sozialforschung, Duisburg-Hochfeld.</h1>
+
+<!-- ===== FELD ===== -->
+<main id="feld">
+  <div class="ghost serif" aria-hidden="true">Leerstellen</div>
+  <div class="corner tl">
+    <div class="nm serif">Lena Wiese</div>
+    <div class="rl">Interdisziplinäre Stadt-, Migrations- und Sozialforschung. Duisburg-Hochfeld.</div>
+  </div>
+  <div class="corner bl mono" id="hauptinhalt">Klicke ein Feld oder eine Leerstelle. Die Karte ist die Navigation.</div>
+  <nav class="corner br mono" id="entry" aria-label="Schnellzugriff">
+    <button data-open="chronologie">→ Chronologie</button><br>
+    <button data-open="strategie">→ Strategie</button><br>
+    <button data-open="vita">→ Vita</button><br>
+    <button data-open="publikationen">→ Publikationen</button><br>
+    <button data-open="kontakt">→ Kontakt</button>
+  </nav>
+  <svg class="lines" id="lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false"></svg>
+</main>
+
+<div class="toggle" role="group" aria-label="Ansicht wählen">
+  <button id="tFeld" class="on" aria-pressed="true">Feld</button>
+  <button id="tReg" aria-pressed="false">Register</button>
+</div>
+
+<!-- sheet -->
+<div id="sheet" role="dialog" aria-modal="true" aria-labelledby="sh" inert>
+  <button class="x mono" onclick="closeSheet()" aria-label="Detailansicht schließen">schließen ✕</button>
+  <div class="k" id="sk"></div>
+  <h2 id="sh"></h2>
+  <p id="sp"></p>
+  <div class="refs" id="sr"></div>
+</div>
+
+<!-- ===== REGISTER ===== -->
+<div id="register" inert>
+  <div class="reg-title">Register</div>
+  <div class="reg-inner">
+    <div class="reg-controls" id="regControls" role="tablist" aria-label="Register-Ansichten"></div>
+    <div id="regBody"></div>
+  </div>
+</div>
+
+<script>
+const N=[
+  {id:'E',t:'core',x:50,y:46,c:'K.00',label:'Klasse & Hegemonie',
+   body:'Der analytische Kern. Nach Marx das Klassenverhältnis aus Eigentum und Produktion, nach Gramsci die Hegemonie, also wie diese Ordnung zur Selbstverständlichkeit wird. Stadt, Rassismus, Geschlecht und Antiziganismus sind von hier aus Erscheinungsformen desselben Verhältnisses.'},
+  {id:'S',t:'praxis',x:50,y:72,c:'P.00',label:'Praktische Solidarität',
+   body:'Der Praxispol gegenüber der Analyse. Nicht akademischer Diskurs, sondern alltägliche, communityübergreifende Praxis, mit Handlungsmacht und Gegenmacht als Ziel.'},
+  {id:'A',t:'field',x:20,y:24,c:'F.01',label:'Umkämpfte Stadt',
+   body:'Kritische Stadtforschung zu Wohnen, Verdrängung, sozialer Mischung und urbaner Sicherheitsproduktion in Duisburg-Hochfeld.',
+   refs:[['2025','Verdrängungspolitik durch die Task Force','sub\\urban'],['2022','How tenants react to rent increases','Urban Studies']]},
+  {id:'A2',t:'field',x:40,y:13,c:'F.02',label:'Taskforce Problemimmobilie',
+   body:'Die Duisburger Task Force als Instrument der Verdrängung, dokumentiert seit 2021.',
+   refs:[['2026','Antiziganistische Räumungspolitik','Berliner Gazette']]},
+  {id:'B',t:'field',x:83,y:19,c:'F.03',label:'Ultranationalismus & Geschlecht',
+   body:'Frauen bei den Grauen Wölfen, Nation, Antifeminismus und ultranationalistische Rollenbilder.',
+   refs:[['2022','Frauen in ultranationalistischen Szenen','bpb'],['2020','Ich bin stolz, Türkin zu sein','Beltz Juventa']]},
+  {id:'P',t:'field',x:87,y:54,c:'F.04',label:'(Rassistische) Polizeigewalt',
+   body:'Rassistische Polizei- und Staatsgewalt, vom Tod Adel B. bis zur Kampagne Amed Ahmad.',
+   refs:[['2020','Kein Einzelfall. Über den Tod von Adel B.','sub\\urban']]},
+  {id:'D',t:'field',x:15,y:52,c:'F.05',label:'Policing von Armut',
+   body:'Meine Promotion. Armuts- und Kriminalitätsdiskurse, Migrationssteuerung und repressive Praktiken an der Reproduktion von Problemstadtteilen.',
+   refs:[['lfd.','Policing von Armut','Uni Duisburg-Essen']]},
+  {id:'C',t:'field',x:24,y:81,c:'F.06',label:'Antiziganismus & Menschenrechte',
+   body:'Rom:nja und Sinte:zza, Gedenkarbeit, Wohnen und Diskriminierung, darin das Forschungsprojekt DjeKa.',
+   refs:[['lfd.','DjeKa — Diskriminierung jenseits der Kategorien','ADS · IAQ']]},
+  {id:'C2',t:'field',x:75,y:81,c:'F.07',label:'Geschichte der Sinti in Duisburg',
+   body:'Verfolgung, Erinnerung und Gegenwart der Duisburger Sinti, von der Ausstellung bis zur Forderung nach einem Gedenkort.'},
+  {id:'KSA',t:'field',x:38,y:64,c:'F.08',label:'Kritische Soziale Arbeit',
+   body:'Disziplinärer Rahmen und Kritik an Sozialer Arbeit als steuernder Fürsorge. Vermittelt zwischen Analyse und Praxis.'},
+  {id:'G1',t:'gap',x:9,y:75,c:'L.01',label:'Roma in Rumänien',
+   body:'Leerstelle, in Arbeit. Die Herkunftsseite der Duisburger Gegenwart. Historische und aktuelle Verfolgung, die den Bogen zur Räumungspolitik hier schließt.'},
+  {id:'G2',t:'gap',x:88,y:68,c:'L.02',label:'Zwangsarbeit in Duisburg',
+   body:'Leerstelle, in Arbeit. Zwangsarbeit und ihre räumlichen Spuren, als Frage nach Kontinuitäten von Ausbeutung und Rassismus.'},
+  {id:'G3',t:'gap',x:33,y:33,c:'L.03',label:'Arbeiterwohnen Ruhrgebiet',
+   body:'Leerstelle, in Arbeit. Die lange Linie vom Zechenwohnen zur Problemimmobilie, spätes 19. Jahrhundert bis heute.'},
+  {id:'O1',t:'open',x:92,y:35,c:'L.—',label:'offen',
+   body:'Eine bewusst leer gehaltene Leerstelle. Die Karte bleibt unfertig, weil die Arbeit mit Leerstellen selbst die Methode ist.'},
+  {id:'ST1',t:'strat',x:28,y:91,c:'S.01',label:'Gegenmacht',
+   body:'Strategie. Räume der Gegenmacht schaffen, kollektive Autonomie und Unabhängigkeit gewinnen, Bildung und Kultur als Gegenhegemonie gegen bestehende Verhältnisse.'},
+  {id:'ST2',t:'strat',x:47,y:90,c:'S.02',label:'Umverteilung',
+   body:'Strategie. Umverteilung von Macht und Ressourcen statt Teilhabe in bestehende Verhältnisse. Die soziale Frage zuerst, nicht Haltung oder Kommunikation.'},
+  {id:'ST3',t:'strat',x:70,y:90,c:'S.03',label:'Organizing',
+   body:'Strategie. Organisierung und Vernetzung im Quartier und darüber hinaus, Selbstorganisierung, Empowerment und dritte Orte als Basis, communityübergreifend.'},
+];
+const E=[['S','E','axis'],['A','E'],['B','E'],['C','E'],['D','E'],['KSA','E'],['A2','A'],['C2','C'],['P','D'],['P','C'],['A','D'],['C','D'],['S','D'],['S','C'],['S','KSA'],['G1','C'],['G1','D'],['G2','C2'],['G2','E'],['G3','A'],['G3','E'],['O1','B'],['ST1','S'],['ST2','S'],['ST3','S'],['ST2','E'],['ST3','C']];
+const by=Object.fromEntries(N.map(n=>[n.id,n]));
+const feld=document.getElementById('feld'), lines=document.getElementById('lines');
+const TYPE_LABEL={core:'Analytischer Kern',praxis:'Praxispol',field:'Bearbeitetes Feld',gap:'Leerstelle, in Arbeit',open:'Bewusst offen gehalten',strat:'Strategie & Aktivismus'};
+
+// draw lines
+E.forEach(([a,b,k])=>{const na=by[a],nb=by[b];
+  const l=document.createElementNS('http://www.w3.org/2000/svg','line');
+  l.setAttribute('x1',na.x);l.setAttribute('y1',na.y);l.setAttribute('x2',nb.x);l.setAttribute('y2',nb.y);
+  if(k)l.setAttribute('class',k); l.dataset.a=a;l.dataset.b=b; lines.appendChild(l);});
+
+// sizes
+const SZ={core:96,praxis:88,field:70,gap:58,open:46,strat:56};
+N.forEach(n=>{
+  const btn=document.createElement('button');
+  btn.className='node '+n.t; btn.style.left=n.x+'%'; btn.style.top=n.y+'%';
+  btn.setAttribute('aria-label',n.label+' — '+TYPE_LABEL[n.t]+', Kennung '+n.c);
+  const d=SZ[n.t];
+  btn.innerHTML=`<span class="dotwrap"><span class="dot" style="width:${d}px;height:${d}px"></span></span>`+
+    `<span class="lab">${n.label}</span><span class="coord mono">${n.c}</span>`;
+  btn.addEventListener('click',()=>openNode(n.id));
+  btn.addEventListener('mouseenter',()=>hot(n.id,true));
+  btn.addEventListener('mouseleave',()=>hot(n.id,false));
+  btn.addEventListener('focus',()=>hot(n.id,true));
+  btn.addEventListener('blur',()=>hot(n.id,false));
+  feld.appendChild(btn);
+});
+function hot(id,on){[...lines.children].forEach(l=>{if(l.dataset.a===id||l.dataset.b===id)l.classList.toggle('hot',on);});}
+
+const sheet=document.getElementById('sheet');
+let lastFocused=null;
+function openNode(id){const n=by[id];
+  lastFocused=document.activeElement;
+  document.getElementById('sk').textContent=n.c+' · '+TYPE_LABEL[n.t];
+  document.getElementById('sh').textContent=n.label;
+  document.getElementById('sp').textContent=n.body;
+  const sr=document.getElementById('sr');
+  if(n.refs&&n.refs.length){sr.style.display='block';sr.innerHTML='<div class="k" style="margin-bottom:8px">Ausgewählte Arbeiten</div>'+
+    n.refs.map(r=>`<div class="r"><b>${r[0]}</b> · ${r[1]} <span class="v">${r[2]}</span></div>`).join('');}
+  else sr.style.display='none';
+  sheet.classList.add('on');
+  sheet.removeAttribute('inert');
+  sheet.querySelector('.x').focus();
+}
+function closeSheet(){
+  sheet.classList.remove('on');
+  sheet.setAttribute('inert','');
+  if(lastFocused)lastFocused.focus();
+}
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){
+    if(sheet.classList.contains('on'))closeSheet();
+  }
+});
+
+// ===== Vita + Publikationen =====
+const VITA=[
+  {y:'laufend', s:2026.9, k:'Promotion', t:'Promotion Policing von Armut', p:'Universität Duisburg-Essen'},
+  {y:'seit 2020', s:2020.9, k:'Beruf', t:'Vorstandsvorsitzende & Mitgründerin', p:'SGDV e.V.'},
+  {y:'2023–24', s:2023, k:'Beruf', t:'Wissenschaftliche Mitarbeiterin', p:'Universität Duisburg-Essen'},
+  {y:'2022–23', s:2022, k:'Beruf', t:'Migrationsberatung', p:'Ziuma e.V.'},
+  {y:'2021–22', s:2021, k:'Beruf', t:'Zentrum für Erinnerungskultur', p:'Stadt Duisburg'},
+  {y:'2018–20', s:2018, k:'Beruf', t:'Wiss. Mitarbeiterin, DFG-Projekt Aneignungskonflikte', p:'Uni DUE'},
+  {y:'2017–18', s:2017, k:'Beruf', t:'Beraterin für Betroffene rechter Gewalt', p:'BackUp Dortmund'},
+  {y:'2014–17', s:2014, k:'Ausbildung', t:'M.A. Internationale Migration & Interkulturelle Beziehungen', p:'Universität Osnabrück'},
+  {y:'2016', s:2016, k:'Ausbildung', t:'Erasmus', p:'Bilgi Universität Istanbul'},
+  {y:'2010–14', s:2010, k:'Ausbildung', t:'B.A. Kultur- & Geschichtswissenschaften', p:'Ruhr-Universität Bochum'},
+];
+const PUBS=[
+  {y:'2026', s:2026, t:'Antiziganistische Räumungspolitik. Zehn Jahre dasselbe Skript in Duisburg', v:'Berliner Gazette', g:'Stadtforschung'},
+  {y:'2025', s:2025, t:'Verdrängungspolitik durch die „Task Force Problemimmobilien"', v:'sub\\urban 13', m:'mit Ellen Drutschmann', g:'Stadtforschung'},
+  {y:'2024', s:2024.3, t:'Wohnungsräumung statt Problemlösung', v:'DeZIMinutes 15', m:'mit Thorsten Schlee', g:'Stadtforschung'},
+  {y:'2024', s:2024.2, t:'Multiple Prekarisierung', v:'IAQ-Report', m:'mit Schlee, Manolova', g:'Stadtforschung'},
+  {y:'2024', s:2024.1, t:'Wenn die Taskforce zweimal klingelt', v:'analyse & kritik', m:'mit Anna Irma Hilfrich', g:'Stadtforschung'},
+  {y:'2022', s:2022.2, t:"How tenants' reactions to rent increases affect displacement", v:'Urban Studies 59(15)', m:'mit Rinn, Wehrheim', g:'Stadtforschung'},
+  {y:'2022', s:2022.1, t:'Frauen in türkischen ultranationalistischen Szenen', v:'bpb', g:'Graue Wölfe'},
+  {y:'2020', s:2020.3, t:'Politiken sozialer Mischung und die Produktivität von Rassismus', v:'Geographica Helvetica 75(1)', m:'mit Moritz Rinn', g:'Stadtforschung'},
+  {y:'2020', s:2020.2, t:'Kein Einzelfall. Über den Tod von Adel B.', v:'sub\\urban 8(1/2)', m:'mit Rinn, Wehrheim', g:'Polizeigewalt'},
+  {y:'2020', s:2020.1, t:'„Ich bin stolz, Türkin zu sein!"', v:'Beltz Juventa', m:'mit Kemal Bozay', g:'Graue Wölfe'},
+  {y:'lfd.', s:2027, t:'DjeKa — Diskriminierung jenseits der Kategorien', v:'ADS · IAQ', g:'Vereinsforschung'},
+];
+
+// ===== Register rendering =====
+const regBody=document.getElementById('regBody'), regControls=document.getElementById('regControls');
+const VIEWS=[['thematisch','Thematisch'],['chronologie','Chronologie'],['strategie','Strategie'],['vita','Vita'],['publikationen','Publikationen'],['kontakt','Kontakt'],['impressum','Impressum'],['datenschutz','Datenschutz']];
+function ent(id,ti,sub,mt){return `<div class="entry"><span class="id mono">${id}</span><span class="ti">${ti}${sub?`<small>${sub}</small>`:''}</span><span class="mt">${mt||''}</span></div>`;}
+function renderControls(active){
+  regControls.innerHTML=VIEWS.map(([k,l])=>`<button class="rc ${k===active?'on':''}" data-view="${k}" role="tab" aria-selected="${k===active}">${l}</button>`).join('');
+  regControls.querySelectorAll('button').forEach(b=>b.onclick=()=>renderRegister(b.dataset.view));
+}
+function renderRegister(view){
+  renderControls(view);
+  let h='';
+  if(view==='thematisch'){
+    const groups=[['Analyse',['E']],['Felder',['A','A2','B','P','D','C','C2','KSA']],['Leerstellen',['G1','G2','G3','O1']],['Strategie & Aktivismus',['S','ST1','ST2','ST3']]];
+    groups.forEach(([title,ids])=>{h+=`<div class="rh">${title}</div>`;
+      ids.forEach(id=>{const n=by[id];h+=ent(n.c,n.label,n.body.split('.')[0]+'.',({core:'analyse',praxis:'praxis',field:'feld',gap:'in arbeit',open:'offen',strat:'strategie'})[n.t]);});});
+    h+=`<div class="rh">Kontakt</div>`+ent('@','wiese@sgdv.org','Duisburg-Hochfeld · Instagram @wiese_lena_','—');
+  } else if(view==='vita'){
+    [['Beruf & Forschung',v=>v.k!=='Ausbildung'],['Ausbildung',v=>v.k==='Ausbildung']].forEach(([title,f])=>{
+      h+=`<div class="rh">${title}</div>`;
+      VITA.filter(f).sort((a,b)=>b.s-a.s).forEach(v=>h+=ent(v.y,v.t,v.p,v.k.toLowerCase()));});
+  } else if(view==='publikationen'){
+    h+=`<div class="rh">Chronologisch · neueste zuerst</div>`;
+    [...PUBS].sort((a,b)=>b.s-a.s).forEach(p=>h+=ent(p.y,p.t,(p.m?p.m+' · ':'')+p.v,p.g.toLowerCase()));
+  } else if(view==='chronologie'){
+    h+=`<div class="rh">Vita und Publikationen · eine Zeitachse</div>`;
+    const merged=[
+      ...PUBS.map(p=>({s:p.s,y:p.y,t:p.t,sub:(p.m?p.m+' · ':'')+p.v,tag:'publikation'})),
+      ...VITA.filter(v=>v.k!=='Ausbildung').map(v=>({s:v.s,y:v.y,t:v.t,sub:v.p,tag:v.k==='Promotion'?'promotion':'station'}))
+    ].sort((a,b)=>b.s-a.s);
+    merged.forEach(it=>h+=ent(it.y,it.t,it.sub,it.tag));
+  } else if(view==='strategie'){
+    h+=`<div class="rh">Strategie &amp; Aktivismus · die Handlungsebene</div>`;
+    ['S','ST1','ST2','ST3'].forEach(id=>{const n=by[id];h+=ent(n.c,n.label,n.body.replace('Strategie. ',''),'praxis');});
+  } else if(view==='kontakt'){
+    h+=`<div class="rh">Kontakt</div><div class="legal">
+      <h3>Schreib mir</h3>
+      <p>Für Anfragen zu Forschung, Vorträgen, Presse oder Zusammenarbeit erreichst du mich per E-Mail.</p>
+      <p><a class="mailto" href="mailto:kontakt@lenawiese.de">kontakt@lenawiese.de</a></p>
+      <a class="btn-mail" href="mailto:kontakt@lenawiese.de">E-Mail schreiben →</a>
+      <p style="margin-top:22px">Der Link öffnet dein E-Mail-Programm. Es werden dabei keine Daten an diese Website oder Dritte übermittelt — die Nachricht verlässt dein Gerät erst, wenn du sie selbst absendest.</p>
+      <p>Instagram: @wiese_lena_ · Duisburg-Hochfeld</p>
+    </div>`;
+  } else if(view==='impressum'){
+    h+=`<div class="rh">Impressum</div><div class="legal">
+      <h3>Angaben gemäß § 5 DDG</h3>
+      <p>Lena Wiese<br>Musfeldstraße 110<br>47053 Duisburg</p>
+      <h3>Kontakt</h3>
+      <p>E-Mail: <a class="mailto" href="mailto:kontakt@lenawiese.de">kontakt@lenawiese.de</a></p>
+      <h3>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h3>
+      <p>Lena Wiese, Anschrift wie oben.</p>
+      <h3>Haftung für Inhalte</h3>
+      <p>Als Diensteanbieterin bin ich gemäß § 7 Abs. 1 DDG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 DDG bin ich als Diensteanbieterin jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.</p>
+      <h3>Haftung für Links</h3>
+      <p>Diese Website enthält ggf. Links zu externen Websites Dritter, auf deren Inhalte ich keinen Einfluss habe. Deshalb kann ich für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter verantwortlich.</p>
+      <h3>Urheberrecht</h3>
+      <p>Die durch mich erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Beiträge Dritter sind als solche gekennzeichnet.</p>
+    </div>`;
+  } else if(view==='datenschutz'){
+    h+=`<div class="rh">Datenschutzerklärung</div><div class="legal">
+      <h3>1. Verantwortliche Stelle</h3>
+      <p>Lena Wiese, Musfeldstraße 110, 47053 Duisburg<br>E-Mail: <a class="mailto" href="mailto:kontakt@lenawiese.de">kontakt@lenawiese.de</a></p>
+      <h3>2. Keine Erhebung personenbezogener Daten beim Besuch dieser Seite</h3>
+      <p>Diese Website ist als rein statische Seite umgesetzt. Es werden keine Cookies gesetzt, kein Tracking und keine Analyse-Tools eingebunden. Es findet keine Auswertung deines Nutzungsverhaltens statt.</p>
+      <h3>3. Schriften</h3>
+      <p>Alle Schriftarten (Fraunces, Space Mono, Inter) sind lokal auf dieser Website eingebunden. Es findet keine Verbindung zu Google-Servern oder anderen externen Font-Anbietern statt, wenn du diese Seite aufrufst — es werden dadurch keine Daten wie deine IP-Adresse an Dritte übertragen.</p>
+      <h3>4. Hosting</h3>
+      <p>Diese Seite wird als statische Website ausgeliefert. Beim Aufruf verarbeitet der Hosting-Anbieter automatisch technische Zugriffsdaten (u. a. IP-Adresse, Datum und Uhrzeit des Zugriffs, aufgerufene Datei, verwendeter Browser), wie es bei jedem Websitebesuch technisch notwendig ist (Server-Logfiles). Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der technischen Bereitstellung und Sicherheit der Seite). Diese Daten werden nicht mit anderen Datenquellen zusammengeführt.</p>
+      <h3>5. Kontaktaufnahme per E-Mail</h3>
+      <p>Wenn du mich über den Kontakt-Link per E-Mail erreichst, werden die von dir mitgeteilten Daten (z. B. Absenderadresse, Inhalt der Nachricht) ausschließlich zur Bearbeitung deiner Anfrage verarbeitet und gespeichert (Art. 6 Abs. 1 lit. b bzw. f DSGVO). Diese Website selbst speichert oder verarbeitet dabei keine Daten — die Nachricht wird direkt über dein eigenes E-Mail-Programm versendet.</p>
+      <h3>6. Deine Rechte</h3>
+      <p>Du hast das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und Widerspruch gegen die Verarbeitung deiner personenbezogenen Daten sowie das Recht auf Beschwerde bei einer Datenschutz-Aufsichtsbehörde. Zuständig ist die Landesbeauftragte für Datenschutz und Informationsfreiheit Nordrhein-Westfalen.</p>
+    </div>`;
+  }
+  regBody.innerHTML=h;
+  regBody.scrollTop=0;
+}
+
+// ===== mode toggle + entries =====
+const tF=document.getElementById('tFeld'),tR=document.getElementById('tReg'),reg=document.getElementById('register');
+function openReg(view){
+  reg.classList.add('on');tR.classList.add('on');tF.classList.remove('on');
+  tR.setAttribute('aria-pressed','true');tF.setAttribute('aria-pressed','false');
+  reg.removeAttribute('inert');feld.setAttribute('inert','');
+  closeSheet();renderRegister(view);
+}
+tF.onclick=()=>{
+  reg.classList.remove('on');tF.classList.add('on');tR.classList.remove('on');
+  tF.setAttribute('aria-pressed','true');tR.setAttribute('aria-pressed','false');
+  feld.removeAttribute('inert');reg.setAttribute('inert','');
+};
+tR.onclick=()=>openReg('thematisch');
+document.querySelectorAll('#entry button').forEach(b=>b.onclick=()=>openReg(b.dataset.open));
+renderRegister('thematisch');
+</script>
+</body>
+</html>
