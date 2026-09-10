@@ -190,7 +190,6 @@
   <div class="corner bl mono" id="hauptinhalt">Klicke ein Feld oder eine Leerstelle. Die Karte ist die Navigation.</div>
   <nav class="corner br mono" id="entry" aria-label="Schnellzugriff">
     <button data-open="chronologie">→ Chronologie</button><br>
-    <button data-open="strategie">→ Strategie</button><br>
     <button data-open="vita">→ Vita</button><br>
     <button data-open="publikationen">→ Publikationen</button><br>
     <button data-open="vortraege">→ Vorträge</button><br>
@@ -374,7 +373,7 @@ const VORTRAEGE=[
 
 // ===== Register rendering =====
 const regBody=document.getElementById('regBody'), regControls=document.getElementById('regControls');
-const VIEWS=[['thematisch','Thematisch'],['chronologie','Chronologie'],['strategie','Strategie'],['vita','Vita'],['publikationen','Publikationen'],['vortraege','Vorträge'],['kontakt','Kontakt'],['impressum','Impressum'],['datenschutz','Datenschutz']];
+const VIEWS=[['thematisch','Thematisch'],['chronologie','Chronologie'],['vita','Vita'],['publikationen','Publikationen'],['vortraege','Vorträge'],['kontakt','Kontakt'],['impressum','Impressum'],['datenschutz','Datenschutz']];
 function ent(id,ti,sub,mt,url){
   const title=url?`<a href="${url}" target="_blank" rel="noopener noreferrer">${ti} ↗</a>`:ti;
   return `<div class="entry"><span class="id mono">${id}</span><span class="ti">${title}${sub?`<small>${sub}</small>`:''}</span><span class="mt">${mt||''}</span></div>`;
@@ -409,9 +408,6 @@ function renderRegister(view){
       ...VITA.filter(v=>v.k!=='Ausbildung').map(v=>({s:v.s,y:v.y,t:v.t,sub:v.p,tag:v.k==='Promotion'?'promotion':(v.k==='Engagement'?'engagement':'station')}))
     ].sort((a,b)=>b.s-a.s);
     merged.forEach(it=>h+=ent(it.y,it.t,it.sub,it.tag,it.u));
-  } else if(view==='strategie'){
-    h+=`<div class="rh">Strategie &amp; Aktivismus · die Handlungsebene</div>`;
-    ['S','ST1','ST2','ST3'].forEach(id=>{const n=by[id];h+=ent(n.c,n.label,n.body.replace('Strategie. ',''),'praxis');});
   } else if(view==='kontakt'){
     h+=`<div class="rh">Kontakt</div><div class="legal">
       <h3>Schreib mir</h3>
