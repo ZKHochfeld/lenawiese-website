@@ -189,7 +189,7 @@
 </head>
 <body>
 
-<a href="#hauptinhalt" class="skip-link mono">Zum Hauptinhalt springen</a>
+<a href="#feld" class="skip-link mono">Zum Hauptinhalt springen</a>
 
 <!-- ===== INTRO ===== -->
 <header id="intro">
@@ -204,13 +204,13 @@
 </header>
 
 <!-- ===== FELD ===== -->
-<main id="feld">
+<main id="feld" tabindex="-1">
   <div class="ghost serif" aria-hidden="true">Leerstellen</div>
   <div class="corner tl">
     <div class="nm serif">Lena Wiese</div>
     <div class="rl">Interdisziplinäre Stadt-, Migrations- und Sozialforschung. Duisburg-Hochfeld.</div>
   </div>
-  <div class="corner bl mono" id="hauptinhalt">Klicke ein Feld oder eine Leerstelle. Die Karte ist die Navigation.</div>
+  <div class="corner bl mono">Klicke ein Feld oder eine Leerstelle. Die Karte ist die Navigation.</div>
   <nav class="corner br mono" id="entry" aria-label="Schnellzugriff">
     <button data-open="chronologie">→ Chronologie</button><br>
     <button data-open="vita">→ Vita</button><br>
@@ -366,10 +366,10 @@ const PUBS=[
   {y:'2022', s:2022.1, t:'Frauen in türkischen ultranationalistischen Szenen', v:'in: Jamal/Aydın (Hg.), „Graue Wölfe". Türkischer Ultranationalismus in Deutschland, bpb', g:'Graue Wölfe'},
   {y:'2021', s:2021, t:'Konflikte um Wohnen in Gentrifizierungsgebieten. Ein interaktionistischer Zugang', v:'Verhandlungen des 40. Kongresses der Deutschen Gesellschaft für Soziologie', m:'mit Rinn, Wehrheim', g:'Stadtforschung', u:'https://publikationen.soziologie.de/index.php/kongressband_2020/article/view/1361/1625'},
   {y:'2020', s:2020.3, t:'Politiken sozialer Mischung und die Produktivität von Rassismus im „gefährlichen Viertel"', v:'Geographica Helvetica 75(1), 23–36', m:'mit Moritz Rinn', g:'Stadtforschung', u:'https://doi.org/10.5194/gh-75-23-2020'},
-  {y:'2020', s:2020.2, t:'Kein Einzelfall. Über den Tod von Adel B., der während eines Polizeieinsatzes in Essen-Altendorf erschossen wurde', v:'sub\\urban 8(1/2)', m:'mit Rinn, Wehrheim', g:'Polizeigewalt', u:'https://zeitschrift-suburban.de/sys/index.php/suburban/article/view/556/754'},
+  {y:'2020', s:2020.2, t:'Kein Einzelfall. Über den Tod von Adel B., der während eines Polizeieinsatzes in Essen-Altendorf erschossen wurde', v:'sub\\urban 8(1/2)', m:'mit Rinn, Wehrheim', g:'Polizeigewalt', u:'https://zeitschrift-suburban.de/sys/index.php/suburban/article/view/556'},
   {y:'2020', s:2020.1, t:'„Ich bin stolz, Türkin zu sein!" Ultranationalistische Einstellungen von jungen Frauen bei den Grauen Wölfen', v:'in: Borstel/Bozay (Hg.), Kultur der Anerkennung statt Menschenfeindlichkeit, Beltz Juventa', m:'mit Kemal Bozay', g:'Graue Wölfe'},
   {y:'2018', s:2018.2, t:'Frauen in ultranationalistischen türkischen Szenen — Interview über Ideologie und Rollenbilder der Grauen Wölfe', v:'ufuq.de', g:'Graue Wölfe', u:'http://www.ufuq.de/frauen-in-ultranationalistischen-tuerkischen-szenen-interview-mit-lena-wiese-ueber-ideologie-und-rollenbilder-der-grauen-woelfe/'},
-  {y:'2018', s:2018.1, t:'„Ich bin stolz, Türkin zu sein!" Ultranationalistische Einstellungen von Mädchen und jungen Frauen bei den Grauen Wölfen', v:'Betrifft Mädchen 4 (2018), S. 164–169', m:'mit Kemal Bozay', g:'Graue Wölfe', u:'https://www.beltz.de/fachmedien/sozialpaedagogik_soziale_arbeit/zeitschriften/betrifft_maedchen/article/Journal.html?tx_beltz_journal%5Barticle%5D=40039&cHash=1354c72ee936ed5ab9e1dbfa9d10c70b'},
+  {y:'2018', s:2018.1, t:'„Ich bin stolz, Türkin zu sein!" Ultranationalistische Einstellungen von Mädchen und jungen Frauen bei den Grauen Wölfen', v:'Betrifft Mädchen 4 (2018), S. 164–169', m:'mit Kemal Bozay', g:'Graue Wölfe'},
 ];
 const VORTRAEGE=[
   {y:'2026', s:2026.5, t:'Problemimmobilien als Verdrängungstechnik — ordnungsrechtliche Verwaltungsakte als Mittel städtischer Verdrängung & Aufwertung', v:'AK Kritische Geographie, Universität Münster, 16.06.2026', g:'Stadtforschung'},
@@ -411,7 +411,7 @@ function renderRegister(view){
   if(view==='thematisch'){
     const groups=[['Analyse',['E']],['Felder',['A','A2','B','P','D','C','C2','KSA']],['Leerstellen',['G1','G2','G3']],['Strategie & Aktivismus',['S','ST1','ST2','ST3']]];
     groups.forEach(([title,ids])=>{h+=`<div class="rh">${title}</div>`;
-      ids.forEach(id=>{const n=by[id];h+=ent(n.c,n.label,n.body.split('.')[0]+'.',({core:'analyse',praxis:'praxis',field:'feld',gap:'in arbeit',open:'offen',strat:'strategie'})[n.t]);});});
+      ids.forEach(id=>{const n=by[id];const plain=n.body.replace(/<[^>]+>/g,'');h+=ent(n.c,n.label,plain.split('.')[0]+'.',({core:'analyse',praxis:'praxis',field:'feld',gap:'in arbeit',open:'offen',strat:'strategie'})[n.t]);});});
     h+=`<div class="rh">Kontakt</div>`+ent('@','kontakt@lenawiese.de','Duisburg-Hochfeld · Instagram @wiese_lena_','—');
   } else if(view==='vita'){
     [['Beruf & Engagement',v=>v.k!=='Ausbildung'],['Ausbildung',v=>v.k==='Ausbildung']].forEach(([title,f])=>{
@@ -452,7 +452,7 @@ function renderRegister(view){
         <label for="cf-msg">Nachricht *</label>
         <textarea id="cf-msg" name="Nachricht" required></textarea>
         <label class="consent">
-          <input type="checkbox" required>
+          <input type="checkbox" name="Einwilligung Datenschutz" value="Ja, akzeptiert" required>
           <span>Ich bin mit der Verarbeitung meiner Angaben zur Bearbeitung dieser Anfrage einverstanden, siehe <button type="button" onclick="openReg('datenschutz')" style="background:none;border:none;padding:0;color:var(--terra);text-decoration:underline;cursor:pointer;font:inherit">Datenschutzerklärung</button>. *</span>
         </label>
         <button type="submit" class="btn-mail">Absenden →</button>
@@ -486,14 +486,19 @@ function renderRegister(view){
       <h3>3. Schriften</h3>
       <p>Alle Schriftarten (Fraunces, Space Mono, Inter) sind lokal auf dieser Website eingebunden. Es findet keine Verbindung zu Google-Servern oder anderen externen Font-Anbietern statt, wenn du diese Seite aufrufst — es werden dadurch keine Daten wie deine IP-Adresse an Dritte übertragen.</p>
       <h3>4. Hosting</h3>
-      <p>Diese Seite wird als statische Website ausgeliefert. Beim Aufruf verarbeitet der Hosting-Anbieter automatisch technische Zugriffsdaten (u. a. IP-Adresse, Datum und Uhrzeit des Zugriffs, aufgerufene Datei, verwendeter Browser), wie es bei jedem Websitebesuch technisch notwendig ist (Server-Logfiles). Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der technischen Bereitstellung und Sicherheit der Seite). Diese Daten werden nicht mit anderen Datenquellen zusammengeführt.</p>
+      <p>Diese Website wird über <strong>GitHub Pages</strong> ausgeliefert, einen Dienst der GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA (Teil der Microsoft Corporation). Beim Aufruf dieser Seite verarbeitet GitHub automatisch technische Zugriffsdaten in Server-Logfiles (u. a. IP-Adresse, Datum und Uhrzeit des Zugriffs, aufgerufene Datei, Referrer-URL, verwendeter Browser), wie es bei jedem Websitebesuch technisch notwendig ist. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einer sicheren und funktionsfähigen Bereitstellung der Website). Diese Daten werden nicht mit anderen Datenquellen zusammengeführt.</p>
+      <p>Da GitHub, Inc. ihren Sitz in den USA hat, ist bei diesen technischen Zugriffsdaten eine Übermittlung in ein Drittland außerhalb der EU/des EWR nicht auszuschließen. GitHub stützt solche Übermittlungen nach eigenen Angaben auf Standardvertragsklauseln der EU-Kommission. Weitere Informationen findest du in der <a class="mailto" href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener noreferrer">Datenschutzerklärung von GitHub</a>.</p>
       <h3>5. Kontaktformular</h3>
       <p>Für das Kontaktformular nutze ich den Dienst <strong>FormSubmit</strong> (formsubmit.co), der die Formulardaten technisch entgegennimmt und per E-Mail an mich weiterleitet. Beim Absenden werden die von dir eingegebenen Daten (Vorname, Nachname, E-Mail-Adresse, optional Telefonnummer, Nachricht) an die Server dieses Anbieters übermittelt und von dort an meine E-Mail-Adresse weitergeleitet. Die Verarbeitung erfolgt auf Grundlage deiner Einwilligung (Art. 6 Abs. 1 lit. a DSGVO), die du beim Absenden des Formulars über die Checkbox erteilst, sowie auf Grundlage meines berechtigten Interesses an der Bearbeitung von Anfragen (Art. 6 Abs. 1 lit. f DSGVO). Du kannst deine Einwilligung jederzeit mit Wirkung für die Zukunft widerrufen, indem du mich per E-Mail kontaktierst.</p>
       <p>Zum Anbieter FormSubmit: Nach eigenen Angaben des Anbieters (siehe dessen <a class="mailto" href="https://formsubmit.co/privacy.pdf" target="_blank" rel="noopener noreferrer">Datenschutzhinweise</a>) werden keine darüberhinausgehenden Daten dauerhaft gespeichert; genauere Angaben zum Serverstandort oder eine Auftragsverarbeitungsvereinbarung nach Art. 28 DSGVO bietet der Anbieter derzeit nicht an. Es ist daher nicht auszuschließen, dass die Datenverarbeitung teilweise außerhalb der EU stattfindet. Die im Formular integrierte Spamerkennung von Google (reCAPTCHA) ist bewusst deaktiviert, sodass beim Ausfüllen des Formulars keine Verbindung zu Google-Servern aufgebaut wird. Wenn du diese Datenübermittlung vermeiden möchtest, nutze bitte alternativ die direkte E-Mail-Adresse unten.</p>
       <h3>5a. Kontaktaufnahme per E-Mail</h3>
       <p>Wenn du mich stattdessen direkt per E-Mail erreichst, werden die von dir mitgeteilten Daten (z. B. Absenderadresse, Inhalt der Nachricht) ausschließlich zur Bearbeitung deiner Anfrage verarbeitet und gespeichert (Art. 6 Abs. 1 lit. b bzw. f DSGVO). Diese Website selbst speichert oder verarbeitet dabei keine Daten — die Nachricht wird direkt über dein eigenes E-Mail-Programm versendet.</p>
-      <h3>6. Deine Rechte</h3>
-      <p>Du hast das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und Widerspruch gegen die Verarbeitung deiner personenbezogenen Daten sowie das Recht auf Beschwerde bei einer Datenschutz-Aufsichtsbehörde. Zuständig ist die Landesbeauftragte für Datenschutz und Informationsfreiheit Nordrhein-Westfalen.</p>
+      <h3>6. Verlinkung externer Seiten und sozialer Netzwerke</h3>
+      <p>Diese Website enthält an mehreren Stellen Links zu externen Seiten, etwa zu meinen Profilen bei Instagram und Facebook (Meta Platforms Ireland Ltd.), zur Initiative Amed Ahmad sowie zu Verlagen, Zeitschriften und Institutionen im Rahmen der Publikationsliste. Es handelt sich dabei ausnahmslos um einfache Verlinkungen, nicht um eingebettete Inhalte (z. B. keine eingebetteten Instagram-Posts oder Like-Buttons). Eine Datenübertragung an die jeweiligen Anbieter findet daher nicht automatisch beim Aufruf dieser Seite statt, sondern erst, wenn du einen Link aktiv anklickst und zur externen Seite wechselst. Dort gelten die Datenschutzbestimmungen des jeweiligen Anbieters.</p>
+      <h3>7. Deine Rechte</h3>
+      <p>Du hast das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und Widerspruch gegen die Verarbeitung deiner personenbezogenen Daten sowie das Recht auf Beschwerde bei einer Datenschutz-Aufsichtsbehörde. Zuständig ist die Landesbeauftragte für Datenschutz und Informationsfreiheit Nordrhein-Westfalen (LDI NRW), Kavalleriestraße 2–4, 40213 Düsseldorf.</p>
+      <h3>8. Aktualität</h3>
+      <p>Diese Datenschutzerklärung hat den Stand September 2026.</p>
     </div>`;
   }
   regBody.innerHTML=h;
@@ -501,17 +506,17 @@ function renderRegister(view){
 }
 
 // ===== mode toggle + entries =====
-const tF=document.getElementById('tFeld'),tR=document.getElementById('tReg'),reg=document.getElementById('register');
+const tF=document.getElementById('tFeld'),tR=document.getElementById('tReg'),reg=document.getElementById('register'),intro=document.getElementById('intro');
 function openReg(view){
   reg.classList.add('on');tR.classList.add('on');tF.classList.remove('on');
   tR.setAttribute('aria-pressed','true');tF.setAttribute('aria-pressed','false');
-  reg.removeAttribute('inert');feld.setAttribute('inert','');
+  reg.removeAttribute('inert');feld.setAttribute('inert','');intro.setAttribute('inert','');
   closeSheet();renderRegister(view);
 }
 tF.onclick=()=>{
   reg.classList.remove('on');tF.classList.add('on');tR.classList.remove('on');
   tF.setAttribute('aria-pressed','true');tR.setAttribute('aria-pressed','false');
-  feld.removeAttribute('inert');reg.setAttribute('inert','');
+  feld.removeAttribute('inert');intro.removeAttribute('inert');reg.setAttribute('inert','');
 };
 tR.onclick=()=>openReg('thematisch');
 document.querySelectorAll('#entry button').forEach(b=>b.onclick=()=>openReg(b.dataset.open));
