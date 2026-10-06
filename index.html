@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lena Wiese — Feld</title>
-<meta name="description" content="Lena Wiese — interdisziplinäre Stadt-, Migrations- und Sozialforschung in Duisburg-Hochfeld. Forschung zu Verdrängung, Antiziganismus, Polizeigewalt und kritischer Sozialer Arbeit.">
+<meta name="description" content="Lena Wiese — interdisziplinäre Stadt-, Migrations- und Sozialforschung in Duisburg-Hochfeld. Forschung zu Verdrängung, Antiziganismus, antikurdischem Rassismus, Polizeigewalt und kritischer Sozialer Arbeit.">
 <meta name="color-scheme" content="dark light">
 <meta property="og:title" content="Lena Wiese — Feld">
 <meta property="og:description" content="Interdisziplinäre Stadt-, Migrations- und Sozialforschung. Duisburg-Hochfeld.">
@@ -259,6 +259,9 @@ const N=[
   {id:'B',t:'field',x:83,y:19,c:'F.03',label:'Ultranationalismus & Geschlecht',
    body:'Frauen bei den Grauen Wölfen, Nation, Antifeminismus und ultranationalistische Rollenbilder.',
    refs:[['2026','Die „ideale Türkin" und der antikurdische Rassismus','IAKR-Jahresbericht'],['2022','Frauen in ultranationalistischen Szenen','bpb'],['2020','Ich bin stolz, Türkin zu sein','Beltz Juventa']]},
+  {id:'AK',t:'field',x:75,y:37,c:'F.09',label:'Antikurdischer Rassismus',
+   body:'Antikurdischer Rassismus als Praxis des türkischen Ultranationalismus, mit besonderem Blick auf die Rolle von Mädchen und Frauen. Bearbeitet über Gastbeitrag und Vorträge für die <a href="https://antikurdischer-rassismus.de" target="_blank" rel="noopener noreferrer">Informationsstelle Antikurdischer Rassismus (IAKR)</a>.',
+   refs:[['2026','Die „ideale Türkin" und der antikurdische Rassismus','IAKR-Jahresbericht']]},
   {id:'P',t:'field',x:87,y:54,c:'F.04',label:'(Rassistische) Polizeigewalt',
    body:'Rassistische Polizei- und Staatsgewalt, vom Tod Adel B. bis zum Aktivismus in der <a href="https://www.staatsgewalt.org" target="_blank" rel="noopener noreferrer">Initiative Amed Ahmad</a>, seit 2018.',
    refs:[['2020','Kein Einzelfall. Über den Tod von Adel B.','sub\\urban']]},
@@ -284,7 +287,7 @@ const N=[
   {id:'ST3',t:'strat',x:70,y:90,c:'S.03',label:'Organizing',
    body:'Strategie. Organisierung und Vernetzung im Quartier und darüber hinaus, Selbstorganisierung, Empowerment und dritte Orte als Basis, communityübergreifend.'},
 ];
-const E=[['S','E','axis'],['A','E'],['B','E'],['C','E'],['D','E'],['KSA','E'],['A2','A'],['C2','C'],['P','D'],['P','C'],['A','D'],['C','D'],['S','D'],['S','C'],['S','KSA'],['G1','C'],['G1','D'],['G2','C2'],['G2','E'],['G3','A'],['G3','E'],['B','P'],['B','D'],['ST1','S'],['ST2','S'],['ST3','S'],['ST2','E'],['ST3','C']];
+const E=[['S','E','axis'],['A','E'],['B','E'],['C','E'],['D','E'],['KSA','E'],['A2','A'],['C2','C'],['P','D'],['P','C'],['A','D'],['C','D'],['S','D'],['S','C'],['S','KSA'],['G1','C'],['G1','D'],['G2','C2'],['G2','E'],['G3','A'],['G3','E'],['B','P'],['B','D'],['AK','B'],['AK','E'],['ST1','S'],['ST2','S'],['ST3','S'],['ST2','E'],['ST3','C']];
 const by=Object.fromEntries(N.map(n=>[n.id,n]));
 const feld=document.getElementById('feld'), lines=document.getElementById('lines');
 const TYPE_LABEL={core:'Analytischer Kern',praxis:'Praxispol',field:'Bearbeitetes Feld',gap:'Leerstelle, in Arbeit',open:'Bewusst offen gehalten',strat:'Strategie & Aktivismus'};
@@ -411,7 +414,7 @@ function renderRegister(view){
   renderControls(view);
   let h='';
   if(view==='thematisch'){
-    const groups=[['Analyse',['E']],['Felder',['A','A2','B','P','D','C','C2','KSA']],['Leerstellen',['G1','G2','G3']],['Strategie & Aktivismus',['S','ST1','ST2','ST3']]];
+    const groups=[['Analyse',['E']],['Felder',['A','A2','B','AK','P','D','C','C2','KSA']],['Leerstellen',['G1','G2','G3']],['Strategie & Aktivismus',['S','ST1','ST2','ST3']]];
     groups.forEach(([title,ids])=>{h+=`<div class="rh">${title}</div>`;
       ids.forEach(id=>{const n=by[id];const plain=n.body.replace(/<[^>]+>/g,'');h+=ent(n.c,n.label,plain.split('.')[0]+'.',({core:'analyse',praxis:'praxis',field:'feld',gap:'in arbeit',open:'offen',strat:'strategie'})[n.t]);});});
     h+=`<div class="rh">Kontakt</div>`+ent('@','kontakt@lenawiese.de','Duisburg-Hochfeld · Instagram @wiese_lena_','—');
