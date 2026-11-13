@@ -263,10 +263,10 @@ const N=[
    body:'Antikurdischer Rassismus als Praxis des türkischen Ultranationalismus, mit besonderem Blick auf die Rolle von Mädchen und Frauen. Bearbeitet über Gastbeitrag und Vorträge für die <a href="https://antikurdischer-rassismus.de" target="_blank" rel="noopener noreferrer">Informationsstelle Antikurdischer Rassismus (IAKR)</a>.',
    refs:[['2026','Die „ideale Türkin" und der antikurdische Rassismus','IAKR-Jahresbericht']]},
   {id:'P',t:'field',x:87,y:54,c:'F.04',label:'(Rassistische) Polizeigewalt',
-   body:'Rassistische Polizei- und Staatsgewalt, vom Tod Adel B. bis zum Aktivismus in der <a href="https://www.staatsgewalt.org" target="_blank" rel="noopener noreferrer">Initiative Amed Ahmad</a>, seit 2018.',
+   body:'Rassistische Polizei- und Staatsgewalt, vom Tod Adel B. bis zur Unterstützung der <a href="https://www.staatsgewalt.org" target="_blank" rel="noopener noreferrer">Initiative Amed Ahmad</a> (seit 2018).',
    refs:[['2020','Kein Einzelfall. Über den Tod von Adel B.','sub\\urban']]},
   {id:'D',t:'field',x:15,y:52,c:'F.05',label:'Policing von Armut',
-   body:'Armuts- und Kriminalitätsdiskurse, Migrationssteuerung und repressive Praktiken an der Reproduktion von Problemstadtteilen — in Bearbeitung.'},
+   body:'Armuts- und Kriminalitätsdiskurse, Migrationssteuerung und repressive Praktiken an der Reproduktion von Problemstadtteilen.'},
   {id:'C',t:'field',x:24,y:81,c:'F.06',label:'Antiziganismus & Menschenrechte',
    body:'Rom:nja und Sinte:zza, Gedenkarbeit, Wohnen und Diskriminierung, bearbeitet über Recherche, Aktivismus und Öffentlichkeitsarbeit, darin das Forschungsprojekt DjeKa.',
    refs:[['lfd.','DjeKa — Diskriminierung jenseits der Kategorien','ADS · IAQ']]},
@@ -417,9 +417,10 @@ function renderRegister(view){
   renderControls(view);
   let h='';
   if(view==='thematisch'){
-    const groups=[['Analyse',['E']],['Felder',['A','A2','B','AK','P','D','C','C2','KSA']],['Leerstellen',['G1','G2','G3']],['Strategie & Aktivismus',['S','ST1','ST2','ST3']]];
+    const groups=[['Felder',['A','A2','B','AK','P','D','C','C2','KSA']],['Leerstellen',['G1','G2','G3']],['Strategie & Aktivismus',['S','ST1','ST2','ST3']]];
     groups.forEach(([title,ids])=>{h+=`<div class="rh">${title}</div>`;
-      ids.forEach(id=>{const n=by[id];const plain=n.body.replace(/<[^>]+>/g,'');h+=ent(n.c,n.label,plain.split('.')[0]+'.',({core:'analyse',praxis:'praxis',field:'feld',gap:'in arbeit',open:'offen',strat:'strategie'})[n.t]);});});
+      ids.forEach(id=>{const n=by[id];const plain=n.body.replace(/<[^>]+>/g,'');const m=plain.match(/^.*?[^A-ZÄÖÜ]\.(?=\s|$)/);
+        h+=ent(n.c,n.label,n.t==='strat'?'':(m?m[0]:plain),({core:'analyse',praxis:'praxis',field:'feld',gap:'in arbeit',open:'offen',strat:'strategie'})[n.t]);});});
     h+=`<div class="rh">Kontakt</div>`+ent('@','kontakt@lenawiese.de','Duisburg-Hochfeld · Instagram @wiese_lena_','—');
   } else if(view==='vita'){
     [['Beruf & Engagement',v=>v.k!=='Ausbildung'],['Ausbildung',v=>v.k==='Ausbildung']].forEach(([title,f])=>{
